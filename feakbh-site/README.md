@@ -26,39 +26,56 @@ feakbh-site/
 
 ---
 
-## Como Atualizar o Mural de Avisos
+## Como Atualizar o Mural de Avisos (Carrossel na Home)
 
-Abra o arquivo `pages/mural.html` e adicione um novo bloco **antes** dos avisos existentes, dentro da `<div class="mural-grid">`:
+O mural aparece como carrossel na página inicial (`index.html`), logo após o hero.
+Para adicionar um novo aviso, abra `index.html` e cole um bloco **como primeiro item** dentro de `<div class="mural-track" id="muralTrack">`:
 
-### Aviso só com texto:
+### Modelo COM imagem:
 ```html
-<div class="mural-card fade-in">
-  <div class="mural-card-body">
-    <p class="mural-date">16 de Março de 2026</p>
+<div class="mural-slide">
+  <img class="mural-slide-img" src="images/minha-foto.jpg" alt="Descrição da imagem">
+  <div class="mural-slide-body">
+    <span class="mural-slide-tag destaque">Destaque</span>
     <h3>Título do Aviso</h3>
-    <p>Texto do aviso aqui.</p>
+    <p>Texto do aviso aqui. Pode ter várias linhas.</p>
+    <a href="https://link-opcional.com" class="mural-slide-link">Saiba mais →</a>
+    <div class="mural-slide-date">16 de Março de 2026</div>
   </div>
 </div>
 ```
 
-### Aviso com imagem:
+### Modelo SEM imagem (com emoji e cor):
 ```html
-<div class="mural-card fade-in">
-  <img src="../images/nome-da-imagem.jpg" alt="Descrição">
-  <div class="mural-card-body">
-    <p class="mural-date">16 de Março de 2026</p>
+<div class="mural-slide">
+  <div class="mural-slide-color">🔔</div>
+  <div class="mural-slide-body">
+    <span class="mural-slide-tag aviso">Aviso</span>
     <h3>Título do Aviso</h3>
-    <p>Texto do aviso aqui.</p>
+    <p>Texto aqui.</p>
+    <div class="mural-slide-date">Março 2026</div>
   </div>
 </div>
 ```
 
-**Dica:** Imagens com proporção 16:10 (ex: 800x500px) ficam melhores nos cards.
+### Tags disponíveis:
+| Classe | Cor | Uso |
+|---|---|---|
+| `destaque` | Dourada | Notícias importantes |
+| `aviso` | Verde | Avisos gerais |
+| `campanha` | Azul escuro | Campanhas e ações |
+| `evento` | Vermelha | Eventos e datas |
 
-### Para subir uma imagem do mural:
-1. Salve a imagem na pasta `images/`
-2. Faça commit e push no GitHub
-3. O Cloudflare Pages atualiza automaticamente
+### Para cor de fundo personalizada (sem imagem):
+```html
+<div class="mural-slide-color" style="background:linear-gradient(135deg,#COR1,#COR2)">📢</div>
+```
+
+### Dicas:
+- Imagens: proporção 16:9 (ex: 800x450px) ficam perfeitas
+- Salve imagens na pasta `images/`
+- O carrossel funciona com drag/swipe no celular
+- Avisos mais novos devem ficar PRIMEIRO na lista
 
 ---
 

@@ -454,6 +454,131 @@ section { padding: 100px 24px; }
 .mt-40 { margin-top: 40px; }
 .mb-40 { margin-bottom: 40px; }
 
+/* ===== MURAL CARROSSEL ===== */
+.mural-carousel-section {
+  background: var(--white);
+  padding: 80px 0 100px;
+  overflow: hidden;
+}
+.mural-carousel-section .section-header {
+  padding: 0 24px;
+}
+.mural-carousel-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  max-width: var(--max-width); margin: 0 auto 40px; padding: 0 24px;
+}
+.mural-carousel-header .section-header { margin-bottom: 0; text-align: left; }
+.mural-carousel-header .section-subtitle { margin-left: 0; }
+.mural-nav {
+  display: flex; gap: 8px; flex-shrink: 0;
+}
+.mural-nav button {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--cream);
+  color: var(--navy); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.mural-nav button:hover {
+  background: var(--gold); color: var(--navy-deep);
+  border-color: var(--gold); transform: scale(1.05);
+}
+.mural-nav button:disabled {
+  opacity: 0.3; cursor: default; transform: none;
+  background: var(--cream);
+}
+
+.mural-track-wrapper {
+  max-width: var(--max-width); margin: 0 auto; padding: 0 24px;
+  overflow: visible;
+}
+.mural-track {
+  display: flex; gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  cursor: grab;
+}
+.mural-track.dragging { cursor: grabbing; transition: none; }
+
+.mural-slide {
+  min-width: 380px; max-width: 380px;
+  background: var(--cream); border-radius: var(--radius-lg);
+  overflow: hidden; border: 1px solid rgba(0,0,0,0.05);
+  transition: all 0.3s; flex-shrink: 0;
+  display: flex; flex-direction: column;
+}
+.mural-slide:hover {
+  box-shadow: var(--shadow-md); border-color: var(--border);
+  transform: translateY(-4px);
+}
+
+/* Slide com imagem */
+.mural-slide-img {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover;
+}
+/* Slide com cor de fundo (sem imagem) */
+.mural-slide-color {
+  width: 100%; aspect-ratio: 16/9;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+}
+
+.mural-slide-body {
+  padding: 28px 24px; flex: 1; display: flex; flex-direction: column;
+}
+.mural-slide-tag {
+  display: inline-block; font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 4px 12px; border-radius: 20px; margin-bottom: 14px;
+  width: fit-content;
+}
+.mural-slide-tag.destaque {
+  background: rgba(201,168,76,0.15); color: var(--gold-dark);
+}
+.mural-slide-tag.aviso {
+  background: rgba(107,143,113,0.15); color: var(--sage);
+}
+.mural-slide-tag.campanha {
+  background: rgba(26,38,64,0.1); color: var(--navy);
+}
+.mural-slide-tag.evento {
+  background: rgba(180,80,80,0.12); color: #A04040;
+}
+
+.mural-slide h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 700; color: var(--navy);
+  line-height: 1.3; margin-bottom: 10px;
+}
+.mural-slide p {
+  font-size: 14px; color: var(--text-mid); line-height: 1.7;
+  font-weight: 300; flex: 1;
+}
+.mural-slide .mural-slide-date {
+  font-size: 12px; color: var(--text-light); margin-top: 16px;
+  padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.06);
+}
+.mural-slide .mural-slide-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 14px; font-size: 13px; font-weight: 600;
+  color: var(--gold); transition: gap 0.3s;
+}
+.mural-slide .mural-slide-link:hover { gap: 10px; }
+
+/* Progress dots */
+.mural-dots {
+  display: flex; justify-content: center; gap: 8px;
+  margin-top: 32px; padding: 0 24px;
+}
+.mural-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--border); border: none; cursor: pointer;
+  transition: all 0.3s; padding: 0;
+}
+.mural-dot.active {
+  background: var(--gold); width: 28px; border-radius: 4px;
+}
+
 /* ===== ANIMATIONS ===== */
 .fade-in {
   opacity: 0; transform: translateY(25px);
@@ -476,4 +601,7 @@ section { padding: 100px 24px; }
   .card-grid { grid-template-columns: 1fr; }
   .books-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .mural-grid { grid-template-columns: 1fr; }
+  .mural-slide { min-width: 300px; max-width: 300px; }
+  .mural-carousel-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .mural-nav { align-self: flex-end; }
 }

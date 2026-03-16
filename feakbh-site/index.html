@@ -64,6 +64,126 @@
     </div>
   </section>
 
+  <!-- ============================================================
+       MURAL DE INFORMAÇÕES (Carrossel)
+       
+       COMO ADICIONAR UM NOVO AVISO:
+       1. Copie um bloco <div class="mural-slide"> abaixo
+       2. Cole como PRIMEIRO item dentro de .mural-track
+       3. Edite título, texto, tag e data
+       4. Para imagem: use <img class="mural-slide-img" src="images/foto.jpg" alt="...">
+       5. Sem imagem: use <div class="mural-slide-color">🔔</div> (troque o emoji)
+       6. Tags disponíveis: destaque, aviso, campanha, evento
+       7. Commit + push = atualizado automaticamente
+       ============================================================ -->
+  <section class="mural-carousel-section">
+    <div class="mural-carousel-header">
+      <div class="section-header">
+        <div class="section-label">Fique por dentro</div>
+        <h2 class="section-title">Mural de Informações</h2>
+        <p class="section-subtitle">Avisos, campanhas e novidades da FEAKBH.</p>
+      </div>
+      <div class="mural-nav">
+        <button class="mural-prev" aria-label="Anterior">←</button>
+        <button class="mural-next" aria-label="Próximo">→</button>
+      </div>
+    </div>
+
+    <div class="mural-track-wrapper">
+      <div class="mural-track" id="muralTrack">
+
+        <!-- AVISO 1 — Campanha do Telhado -->
+        <div class="mural-slide">
+          <div class="mural-slide-color" style="background:linear-gradient(135deg,#B8943F,var(--gold-light))">🏗️</div>
+          <div class="mural-slide-body">
+            <span class="mural-slide-tag campanha">Campanha</span>
+            <h3>Campanha do Telhado</h3>
+            <p>A FEAKBH precisa da sua colaboração para a reforma do telhado da casa espírita. Toda contribuição, por menor que seja, é um ato de amor e caridade.</p>
+            <a href="https://feakbh.com/CampanhaTelhado.html" class="mural-slide-link">Saiba como ajudar →</a>
+            <div class="mural-slide-date">Campanha ativa</div>
+          </div>
+        </div>
+
+        <!-- AVISO 2 — Nova Sede -->
+        <div class="mural-slide">
+          <div class="mural-slide-color">🙏</div>
+          <div class="mural-slide-body">
+            <span class="mural-slide-tag destaque">Destaque</span>
+            <h3>Nova Sede FEAKBH — Mentalização</h3>
+            <p>Pedimos a todos que intensifiquem as orações, mentalizando nossa nova sede, enviando bons fluidos e emanações positivas para materialização dos insumos necessários à construção.</p>
+            <div class="mural-slide-date">Permanente</div>
+          </div>
+        </div>
+
+        <!-- AVISO 3 — DASE -->
+        <div class="mural-slide">
+          <div class="mural-slide-color" style="background:linear-gradient(135deg,var(--sage),#4A7050)">🤝</div>
+          <div class="mural-slide-body">
+            <span class="mural-slide-tag aviso">Institucional</span>
+            <h3>DASE — Assistência Social Espírita</h3>
+            <p>Todas as atividades de doações estão subordinadas ao DASE. Doações que eram direcionadas para grupos externos agora precisam da anuência deste departamento.</p>
+            <div class="mural-slide-date">Institucional</div>
+          </div>
+        </div>
+
+        <!-- AVISO 4 — Estude Kardec -->
+        <div class="mural-slide">
+          <div class="mural-slide-color" style="background:linear-gradient(135deg,var(--navy-light),var(--navy))">📚</div>
+          <div class="mural-slide-body">
+            <span class="mural-slide-tag campanha">Campanha</span>
+            <h3>Estude os Livros da Codificação Espírita</h3>
+            <p>Faça o download gratuito dos livros de Allan Kardec e aprofunde-se no estudo doutrinário. Todos os PDFs disponíveis na nossa biblioteca digital.</p>
+            <a href="pages/downloads.html" class="mural-slide-link">Ir para downloads →</a>
+            <div class="mural-slide-date">Campanha permanente</div>
+          </div>
+        </div>
+
+        <!-- AVISO 5 — Evangelho no Lar -->
+        <div class="mural-slide">
+          <div class="mural-slide-color" style="background:linear-gradient(135deg,#8B6B3D,var(--gold-dark))">🏠</div>
+          <div class="mural-slide-body">
+            <span class="mural-slide-tag campanha">Campanha</span>
+            <h3>Ampliação do Evangelho no Lar</h3>
+            <p>Campanha para fortalecer a prática do Evangelho no Lar durante a Transição Planetária. A união da família no estudo e na prece fortalece os laços espirituais.</p>
+            <a href="https://feakbh.com/37EvaLar.html" class="mural-slide-link">Saiba mais →</a>
+            <div class="mural-slide-date">Campanha ativa</div>
+          </div>
+        </div>
+
+        <!-- AVISO 6 — Livro recomendado -->
+        <div class="mural-slide">
+          <div class="mural-slide-color" style="background:linear-gradient(135deg,#2E4A6B,var(--navy))">📖</div>
+          <div class="mural-slide-body">
+            <span class="mural-slide-tag aviso">Recomendação</span>
+            <h3>Livro: O Que é o Espiritismo</h3>
+            <p>Indicado para iniciantes na Doutrina Espírita. Excelente ponto de partida para quem deseja conhecer os fundamentos do Espiritismo.</p>
+            <a href="https://feakbh.com/Download/QEE_LD.pdf" class="mural-slide-link" download>↓ Download gratuito →</a>
+            <div class="mural-slide-date">Recomendação permanente</div>
+          </div>
+        </div>
+
+        <!-- AVISO 7 — Instagram -->
+        <div class="mural-slide">
+          <div class="mural-slide-color" style="background:linear-gradient(135deg,#833AB4,#FD1D1D,#F77737)">📷</div>
+          <div class="mural-slide-body">
+            <span class="mural-slide-tag evento">Redes Sociais</span>
+            <h3>Siga a FEAKBH no Instagram</h3>
+            <p>Acompanhe mensagens, novidades e programação da casa espírita. Conteúdo atualizado regularmente para edificação e reflexão.</p>
+            <a href="https://www.instagram.com/feak_bh/" target="_blank" rel="noopener" class="mural-slide-link">@feak_bh →</a>
+            <div class="mural-slide-date">Siga-nos!</div>
+          </div>
+        </div>
+
+      </div><!-- /mural-track -->
+    </div><!-- /mural-track-wrapper -->
+
+    <div class="mural-dots" id="muralDots"></div>
+
+    <div class="text-center mt-40">
+      <a href="pages/mural.html" class="btn btn-outline-dark">Ver mural completo →</a>
+    </div>
+  </section>
+
   <!-- ATIVIDADES RESUMO -->
   <section class="bg-white" id="atividades">
     <div class="container">
