@@ -1,4 +1,4 @@
-const CACHE_NAME = 'feakbh-v2';
+const CACHE_NAME = 'feakbh-v3';
 const PRECACHE_URLS = [
   '/',
   '/index.html',

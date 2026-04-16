@@ -13,7 +13,7 @@ if ('serviceWorker' in navigator) {
 (function () {
   var STORAGE_KEY = 'feakbh-install-dismissed-at';
   var COOLDOWN_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
-  var DELAY_MS = 8000; // wait 8s before showing
+  var DELAY_MS = 4000; // wait 4s before showing
 
   // Skip if already running as installed PWA
   var isStandalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches;
