@@ -6,6 +6,108 @@
   <title>Cascata de Luz - FEAKBH</title>
   <meta name="description" content="Artigos e textos doutrinários da série Cascata de Luz, publicados pela FEAKBH.">
   <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* === Cascata de Luz - Estilos específicos === */
+    .cascata-intro {
+      max-width: 700px; margin: 0 auto 60px; text-align: center;
+    }
+    .cascata-intro p {
+      font-size: 16px; color: var(--text-mid); line-height: 1.8; font-weight: 300;
+    }
+
+    /* Nav lateral dos artigos */
+    .cascata-nav {
+      background: var(--cream-warm); border-radius: var(--radius-md);
+      padding: 28px 24px; margin-bottom: 48px;
+      border: 1px solid var(--border);
+    }
+    .cascata-nav h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 700; color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .cascata-nav-list {
+      list-style: none; display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 6px;
+    }
+    .cascata-nav-list a {
+      display: flex; align-items: baseline; gap: 10px;
+      padding: 8px 12px; border-radius: 6px;
+      font-size: 14px; color: var(--text-mid);
+      transition: all 0.2s; text-decoration: none;
+    }
+    .cascata-nav-list a:hover {
+      background: rgba(201,168,76,0.1); color: var(--navy);
+    }
+    .cascata-nav-list .nav-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700; font-size: 16px; color: var(--gold);
+      min-width: 24px;
+    }
+
+    /* Artigo individual */
+    .artigo-full {
+      max-width: 760px; margin: 0 auto;
+      padding: 80px 0; border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .artigo-full:last-child { border-bottom: none; }
+
+    .artigo-full-header {
+      margin-bottom: 36px; text-align: center;
+    }
+    .artigo-full-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; font-weight: 700; color: var(--gold);
+      letter-spacing: 3px; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .artigo-full-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 4vw, 36px); font-weight: 700;
+      color: var(--navy); line-height: 1.2; margin-bottom: 14px;
+    }
+    .artigo-full-author {
+      font-size: 15px; color: var(--text-light); font-weight: 300;
+      font-style: italic;
+    }
+    .artigo-full-divider {
+      width: 50px; height: 2px; background: var(--gold);
+      margin: 0 auto; opacity: 0.4;
+    }
+
+    .artigo-full-body {
+      font-size: 16px; color: var(--text-dark); line-height: 2;
+      font-weight: 300;
+    }
+    .artigo-full-body p {
+      margin-bottom: 20px; text-align: justify;
+    }
+    .artigo-full-body p:last-child { margin-bottom: 0; }
+
+    .artigo-full-source {
+      margin-top: 32px; padding-top: 20px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      font-size: 13px; color: var(--text-light); font-style: italic;
+    }
+
+    .back-to-top {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 24px; font-size: 13px; font-weight: 600;
+      color: var(--gold); text-decoration: none;
+    }
+    .back-to-top:hover { text-decoration: underline; }
+
+    /* Placeholder para artigos pendentes */
+    .artigo-placeholder {
+      text-align: center; padding: 40px;
+      background: var(--cream-warm); border-radius: var(--radius-md);
+      border: 1px dashed var(--border);
+    }
+    .artigo-placeholder p {
+      font-size: 14px; color: var(--text-light); font-style: italic;
+    }
+  </style>
 </head>
 <body>
 
@@ -43,155 +145,402 @@
     <p>Artigos e textos doutrinários para reflexão e estudo espírita.</p>
   </section>
 
-  <section class="bg-white">
+  <section class="bg-white" id="topo">
     <div class="container">
-      <div class="artigo-list">
 
-        <a href="https://feakbh.com/41OAutAp.html" class="artigo-item fade-in">
-          <div class="artigo-number">01</div>
-          <div>
-            <h3>O Auto Aprimoramento</h3>
-            <p class="artigo-author">Maikel Santos</p>
-            <p>Reflexão sobre o caminho da evolução pessoal à luz da Doutrina Espírita.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/42ModeUn.html" class="artigo-item fade-in">
-          <div class="artigo-number">02</div>
-          <div>
-            <h3>Momento de União</h3>
-            <p class="artigo-author">Maikson Santos</p>
-            <p>A importância da união fraterna no contexto espiritual e comunitário.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/43FdaIlus.html" class="artigo-item fade-in">
-          <div class="artigo-number">03</div>
-          <div>
-            <h3>Fantoches da Ilusão</h3>
-            <p class="artigo-author">Jorge Hessen</p>
-            <p>Análise sobre as ilusões que nos afastam do caminho da verdade espiritual.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/44JeEspV.html" class="artigo-item fade-in">
-          <div class="artigo-number">04</div>
-          <div>
-            <h3>Jesus e o Espírito da Verdade</h3>
-            <p class="artigo-author">Fernando A. Moreira</p>
-            <p>Estudo sobre a relação entre os ensinamentos de Jesus e o Consolador Prometido.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/45PeEmo.html" class="artigo-item fade-in">
-          <div class="artigo-number">05</div>
-          <div>
-            <h3>Pensamento e Emoções</h3>
-            <p class="artigo-author">Manoel P. de Miranda</p>
-            <p>O papel do pensamento disciplinado no controle das emoções e na busca do equilíbrio interior.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/46OsAnG.html" class="artigo-item fade-in">
-          <div class="artigo-number">06</div>
-          <div>
-            <h3>Os Anjos Guardiães</h3>
-            <p class="artigo-author">São Luís, Santo Agostinho</p>
-            <p>Sobre os guias espirituais que nos acompanham e nos auxiliam na jornada terrena.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/47ApITar.html" class="artigo-item fade-in">
-          <div class="artigo-number">07</div>
-          <div>
-            <h3>Apelo ao Irmão Tarefeiro</h3>
-            <p class="artigo-author">Maikson Santos</p>
-            <p>Mensagem de incentivo aos trabalhadores da seara espírita.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/48AaosE.html" class="artigo-item fade-in">
-          <div class="artigo-number">08</div>
-          <div>
-            <h3>Alerta aos Espíritas</h3>
-            <p class="artigo-author">Maikson Santos</p>
-            <p>Reflexão sobre a responsabilidade e o compromisso de quem segue a Doutrina Espírita.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/49PurDou.html" class="artigo-item fade-in">
-          <div class="artigo-number">09</div>
-          <div>
-            <h3>Pureza Doutrinária</h3>
-            <p class="artigo-author">Maikel Santos</p>
-            <p>A importância de preservar a pureza dos ensinamentos codificados por Allan Kardec.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/410KeVida.html" class="artigo-item fade-in">
-          <div class="artigo-number">10</div>
-          <div>
-            <h3>Kardec e Vida</h3>
-            <p class="artigo-author">Bezerra de Menezes</p>
-            <p>Homenagem ao codificador e sua contribuição para a compreensão da vida espiritual.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/411OCEsp.html" class="artigo-item fade-in">
-          <div class="artigo-number">11</div>
-          <div>
-            <h3>O Credo Espírita</h3>
-            <p class="artigo-author">Allan Kardec</p>
-            <p>Os princípios fundamentais que norteiam a fé e a prática espírita.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/412EuTeAg.html" class="artigo-item fade-in">
-          <div class="artigo-number">12</div>
-          <div>
-            <h3>Eu Te Agradeço, Senhor</h3>
-            <p class="artigo-author">Prece de Divaldo Franco</p>
-            <p>Prece de gratidão e entrega espiritual ao Criador.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/413EsCoid.html" class="artigo-item fade-in">
-          <div class="artigo-number">13</div>
-          <div>
-            <h3>Espiritismo: Coisa do Demônio?</h3>
-            <p class="artigo-author">Maikson Santos</p>
-            <p>Esclarecimento sobre preconceitos e equívocos comuns acerca da Doutrina Espírita.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/414Evang.html" class="artigo-item fade-in">
-          <div class="artigo-number">14</div>
-          <div>
-            <h3>O Evangelho</h3>
-            <p class="artigo-author">Ivani Moura</p>
-            <p>Reflexão sobre a importância do Evangelho na prática espírita diária.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/415CdaHomo.html" class="artigo-item fade-in">
-          <div class="artigo-number">15</div>
-          <div>
-            <h3>O Homossexualismo na Visão Espírita</h3>
-            <p class="artigo-author">Maikson Santos</p>
-            <p>Abordagem doutrinária sobre o tema sob a perspectiva espírita.</p>
-          </div>
-        </a>
-
-        <a href="https://feakbh.com/416Proposito.html" class="artigo-item fade-in">
-          <div class="artigo-number">16</div>
-          <div>
-            <h3>Qual o Propósito da Vida? A Que Viemos?</h3>
-            <p class="artigo-author">Maikel Santos</p>
-            <p>Reflexão sobre o sentido da existência e a missão de cada espírito na Terra.</p>
-          </div>
-        </a>
-
+      <div class="cascata-intro">
+        <p>A série <strong>Cascata de Luz</strong> reúne textos de autores espíritas e mensagens de Espíritos superiores, oferecendo reflexões profundas sobre a Doutrina Espírita, a reforma íntima e o caminho do bem.</p>
       </div>
+
+      <!-- ÍNDICE DE NAVEGAÇÃO -->
+      <nav class="cascata-nav">
+        <h4>Índice dos Artigos</h4>
+        <ul class="cascata-nav-list">
+          <li><a href="#artigo-01"><span class="nav-num">01</span> O Auto Aprimoramento</a></li>
+          <li><a href="#artigo-02"><span class="nav-num">02</span> Momento de União</a></li>
+          <li><a href="#artigo-03"><span class="nav-num">03</span> Fantoches da Ilusão</a></li>
+          <li><a href="#artigo-04"><span class="nav-num">04</span> Jesus e o Espírito da Verdade</a></li>
+          <li><a href="#artigo-05"><span class="nav-num">05</span> Pensamento e Emoções</a></li>
+          <li><a href="#artigo-06"><span class="nav-num">06</span> Os Anjos Guardiães</a></li>
+          <li><a href="#artigo-07"><span class="nav-num">07</span> Apelo ao Irmão Tarefeiro</a></li>
+          <li><a href="#artigo-08"><span class="nav-num">08</span> Alerta aos Espíritas</a></li>
+          <li><a href="#artigo-09"><span class="nav-num">09</span> Pureza Doutrinária</a></li>
+          <li><a href="#artigo-10"><span class="nav-num">10</span> Kardec e Vida</a></li>
+          <li><a href="#artigo-11"><span class="nav-num">11</span> O Credo Espírita</a></li>
+          <li><a href="#artigo-12"><span class="nav-num">12</span> Eu Te Agradeço, Senhor</a></li>
+          <li><a href="#artigo-13"><span class="nav-num">13</span> O Evangelho</a></li>
+          <li><a href="#artigo-14"><span class="nav-num">14</span> O Homossexualismo na Visão Espírita</a></li>
+          <li><a href="#artigo-15"><span class="nav-num">15</span> Qual o Propósito da Vida?</a></li>
+        </ul>
+      </nav>
+
+      <!-- ============================================================
+           ARTIGOS — CASCATA DE LUZ
+           
+           COMO ADICIONAR UM NOVO ARTIGO:
+           1. Copie o bloco de um artigo existente
+           2. Cole no final, antes do fechamento </div></section>
+           3. Atualize: id, número, título, autor e parágrafos
+           4. Adicione o link no índice de navegação acima
+           ============================================================ -->
+
+      <!-- ARTIGO 01 -->
+      <article class="artigo-full" id="artigo-01">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 01</div>
+          <h2>O Auto Aprimoramento</h2>
+          <p class="artigo-full-author">Maikel Santos</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Muitas pessoas adentram às casas espíritas, como nós mesmos à uns vinte anos atrás, em busca de algo que lhes preenchesse um vazio interior ou então de algum benefício material.</p>
+          <p>Nos deparamos então com algo maravilhoso, que a tudo nos responde e esclarece, que nos exorta à melhoria íntima, que nos possibilita praticar a caridade em diversas modalidades, de acordo com aquilo que mais nos afinamos. A Doutrina Espírita.</p>
+          <p>Verdadeira Cascata de Luz a nos abrir a mente para novas perspectivas, estimulando a Fé raciocinada e o Amor incondicional ao próximo como a nós mesmos.</p>
+          <p>Mas de repente, após alguns anos, ao fazermos uma análise mais profunda de nós mesmos, não raro ante uma das inúmeras provas que a Sabedoria Universal nos envia, perplexos percebemos que nada ou quase nada em nós se modificou além do conhecimento muitas vezes profundo dos princípios doutrinários e/ou dos textos evangélicos.</p>
+          <p>Aonde o erro, onde a falha se muitas vezes freqüentávamos o "Centro" diariamente a custa muitas vezes de compromissos outros? Se participávamos de inúmeras tarefas assistenciais, de reuniões públicas e privativas e/ou divulgávamos a Doutrina e o Evangelho através da palavra oral ou escrita?</p>
+          <p>O erro está em nós mesmos. Jesus disse: "Conhecereis a Verdade e ela vós libertará" e "O Reino de Deus está dentro de vós", não num templo de pedra. A Casa Espírita cumpre fielmente o seu papel, nos descortinando a Verdade, mas não é a nossa permanência na mesma ou nas tarefas que redundará em nossa Reforma Íntima.</p>
+          <p>Para tanto teremos de fazer uma verdadeira "Cirurgia Moral" aonde o bisturi é o Evangelho e o cirurgião somos nós mesmos. Esta cirurgia é pessoal e intransferível, só nós a podemos realizar de posse de todas as possibilidades adquiridas nos estudos e tarefas realizadas.</p>
+          <p>Temos que assumir nossos vícios e defeitos e lutar diariamente para eliminá-los ou pelo menos diminuí-los, substituindo-os por virtudes que ainda não possuímos. Esta prática deverá ser contínua e permanente e independe de freqüentarmos ou não qualquer culto religioso.</p>
+          <p>Sem esta tão falada Reforma Íntima, tudo não passará de teoria, pois sem a Vivência Cristã no dia a dia, fatalmente sucumbiremos ante nossas provas, que chegarão a qualquer momento.</p>
+          <p>Todos nós temos que desenvolver nosso programa próprio, individual de Reforma Íntima, procurando viver o "Faça ao próximo o que gostaria que lhe fizessem", pois sem isso estaremos apesar de todo o cabedal de conhecimentos evangélico/doutrinário com os pés atolados na lama das nossas deficiências morais, impedidos de alçar vôos mais altos rumo às verdadeiras e almejadas conquistas Espirituais.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 02 -->
+      <article class="artigo-full" id="artigo-02">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 02</div>
+          <h2>Momento de União</h2>
+          <p class="artigo-full-author">Maikson Santos</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Tudo o que reformamos requer muito trabalho e esforço daqueles que estão empenhados nesta tarefa.</p>
+          <p>Tomemos por exemplo a reforma de uma casa; logo que se inicia as obras necessárias, a impressão que temos é que a estamos destruindo. Derruba-se uma parede ali, raspa-se as paredes acolá, retira-se todo o piso antigo, etc.</p>
+          <p>Quem chegar de surpresa, pegando o serviço já em andamento ficará assombrado com aquela aparente desordem.</p>
+          <p>Mas tudo que ali se faz tem um objetivo, nada é por um acaso.</p>
+          <p>Nosso planeta como não é novidade para os Espíritas está passando por um momento de transição, de reforma, estamos em plena mudança de "provas e expiação" para "regenerado" onde o amor será maior que a dor.</p>
+          <p>É um momento delicado para toda a humanidade, encarnados e desencarnados, estamos decidindo nosso futuro, onde passaremos os próximos séculos, talvez milênios; na Terra regenerada ou em planetas inferiores sujeitos a novas lições.</p>
+          <p>Emmanuel, segundo Chico Xavier, afirma que por volta de 2057 a Terra será um mundo regenerado (Plantão de Respostas — Pinga Fogo II).</p>
+          <p>O tempo urge, resta-nos pouco tempo para decidirmos e aqueles que não têm esperanças querem nos fazer perder.</p>
+          <p>O Centro Espírita como um farol divino nesta escuridão que ainda é nosso planeta, a orientar aqueles que desejam ver o Caminho, é dos que mais sofre as investidas furiosas das trevas que se comprazem com as sombras.</p>
+          <p>Atenção meus irmãos, agora, mais do que nunca é momento de união. Estejamos despertos para que não caiamos nas ciladas armadas pelos adversários da Luz.</p>
+          <p>Perdoemo-nos não sete vezes, mas setenta vezes sete.</p>
+          <p>Amemos nossos inimigos, oremos pelos que nos perseguem. Sejamos fiéis até a morte e herdaremos a coroa da vida.</p>
+          <p>Deus nos abençoe hoje e sempre pois os tempos são chegados.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 03 -->
+      <article class="artigo-full" id="artigo-03">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 03</div>
+          <h2>Fantoches da Ilusão</h2>
+          <p class="artigo-full-author">Jorge Hessen</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Infelizmente, os Centros Espíritas estão repletos de modismos e práticas vazias de sentido, oriundos da falta de conhecimento das recomendações básicas do Espiritismo. Muitas Instituições Espíritas mantêm práticas e/ou discussões estéreis em torno de temas como: crianças índigo; Chico é ou não é Kardec? Ubaldismos, ramatisismos, apometria, cromoterapias, e tantos outros enfadonhos "ismos" e "pias", empurrados goela abaixo no corpo doutrinário.</p>
+          <p>Há médiuns que confiam, cegamente, nos efeitos das pomadas "cura tudo", como se essa enganosa prática lhes fosse trazer algum benefício. Por relevantes razões, devemos estar atentos às impertinências desses visionários, propagadores de placebos "bentos". Outros, pela apometria, creem revolucionar o universo da "cura espiritual", mas, a bem da verdade, a cura das obsessões não se consegue por um simples toque de mágica apométrica, como fazem os ilusionistas com uma varinha de condão. Desobsessão não ocorre de um momento para outro, pois, quase sempre, é um tratamento que depende de um longo prazo.</p>
+          <p>O legítimo Centro Espírita não promete a cura para quem o procura. A Doutrina Espírita afirma que a "cura" de uma influência espiritual (obsessão) ou doença física depende de uma série de fatores, entre os quais a modificação moral do enfermo, sua necessidade de disciplina mental, seus problemas relacionados com encarnações anteriores e, sobretudo, se há ou não a concessão divina para a solução da dificuldade.</p>
+          <p>O sofrimento é, sempre, a consequência de atos que contrariam as Leis de Deus. É o período necessário para que o Espírito, encarnado ou desencarnado, reflita sobre sua natureza íntima e decida por onde e quando reparar as faltas cometidas, pois Nosso Eterno Pai respeita a nossa singularidade.</p>
+          <p>Já o sofrimento compulsório é uma imposição do Divino Criador, quando o Espírito, deliberadamente, persiste no erro ou insiste no mal, e Ele é o Único que sabe como agir, para o bem do filho rebelde, e até quando deva, ele, sofrer.</p>
+          <p>O Centro Espírita é um pronto-socorro aos necessitados de amparo e esclarecimento, seja através da evangelização, das orações, dos tratamentos espirituais, ou seja, pelas orientações morais e materiais. A Casa Espírita oferece as bênçãos do passe, que é um método, tradicionalmente, eficaz para transmitir fluidos magnéticos e espirituais, pelas mãos dos médiuns sobre a fronte daqueles que se encontram — moral e fisicamente — descompensados, fortalecendo-lhes o corpo físico e o tecido espiritual, ou seja, o perispírito.</p>
+          <p>É evidente que o passe não poderá, em tempo algum, ser aplicado com movimentos bruscos, utilizando-se de objetos, de baforadas de cigarro ou charuto, de estalos de dedos, cânticos estranhos, toque direto no corpo do paciente, e, muito menos, ainda, estando incorporado e, psicofonicamente, verbalizando "aconselhamentos" para o receptor. Isso não é prática recomendável pelos Orientadores Espirituais.</p>
+          <p>Há confrades que insistem em usar trajes especiais no Centro. Cabe alertá-los de que o Espiritismo não adota paramentos especiais para exercê-lo e o que dignifica o trabalhador espírita é a pureza de intenções. A Doutrina Espírita não adota enfeites, amuletos, colares, roupas brancas ("significando o bem") ou roupas pretas ou vermelhas ("significando o mal"). Os trabalhadores cônscios da realidade Espírita trajam roupas normais, de forma simples, até porque, a discrição deve fazer parte dos que trabalham para o Cristo.</p>
+          <p>Casa Espírita séria não comporta imagens de Santos ou personalidades do movimento espírita; amuletos de sorte; figuras que afastam ou atraem maus Espíritos; incensos, preces cantadas, velas e outros quejandos alienantes.</p>
+          <p>A Casa Espírita que se orienta pelos ensinamentos dos Espíritos superiores não realiza práticas bizarras, pois elas nada têm a ver com a Doutrina codificada por Allan Kardec. O Espiritismo ensina, tão somente, a moralização do indivíduo, e o Projeto Espírita é desprovido de aparatos exteriores. Suas propostas terapêuticas, como as de Jesus, fundamentam-se na instrução moral e na reposição de energias e fluidos espirituais, seja pela fluidificação da água, seja pela imposição das mãos através do passe, mas sempre e, fundamentalmente, pelos pensamentos elevados.</p>
+          <p>Os Centros que praticam as terapias ou rituais aqui denunciados, têm liberdade para fazê-lo, porém, não deveriam nominar-se "Espíritas".</p>
+          <p>Se alguém insiste nas práticas inócuas, aqui descritas, com certeza, não está bem informado sobre o que seja Espiritismo. Os Códigos Evangélicos nos impõem a obrigatória fraternidade para com os adeptos equivocados, o que não equivale dizer que devamos nos omitir quanto à oportuna admoestação, para que a Casa Espírita não se transforme em academia de fantoches dos distúrbios psíquicos.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 04 -->
+      <article class="artigo-full" id="artigo-04">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 04</div>
+          <h2>Jesus e o Espírito da Verdade</h2>
+          <p class="artigo-full-author">Fernando A. Moreira</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Na literatura espírita e mais ultimamente e principalmente, nas revistas espíritas, o Espírito de Verdade vem envolto, às vezes, na névoa encantada da curiosidade, noutras, marulhado em atávicas ondas místicas, e mais além, mergulhado nas profundezas do inefável.</p>
+          <p>Temos nós, tendências arraigadas às culturas religiosas arcaicas e por isso, inclinação para triturar o abstrato e transformá-lo no concreto, perfeitamente palpável, personificando os conceitos, as imagens e as idéias.</p>
+          <p>Ante tantas facetas e outros tantos prismas, o Espírito de Verdade toma a forma de Jesus, do Espírito Santo, de Sócrates, de um Espírito ou de uma plêiade de Espíritos, tornando o tema extremamente polêmico. Para Edmundo Vasconcelos, "a verdade não tem rótulo, nem dono a quem prestar obediência, mas por ser luminosa ela é eterna", e é exatamente por isso, que o Espiritismo nos pede uma fé raciocinada.</p>
+          <p>Em "A Gênese" — Anunciação do Consolador, podemos destacar: "Sob o nome de Consolador e de Espírito de Verdade, Jesus anunciou a vinda daquele que havia de ensinar todas as coisas e de lembrar o que ele dissera. (...) prevê não só que ficaria esquecido, como também que seria desvirtuado o que por ele fora dito, visto que o Espírito de Verdade viria tudo lembrar e, de combinação com Elias, restabelecer todas as coisas, isto é, pô-las de acordo com o verdadeiro pensamento de seus ensinos."</p>
+          <p>Dizendo: "Pedirei a meu Pai e ele vos enviará outro Consolador", Jesus claramente indica que esse Consolador não seria ele. As palavras são de Allan Kardec, são do codificador.</p>
+          <p>"O Espiritismo realiza, como ficou demonstrado, todas as condições do Consolador que Jesus prometeu. Não é uma doutrina individual, nem de concepção humana; ninguém pode dizer-se seu criador. É fruto do ensino coletivo dos Espíritos, ensino a que preside o Espírito de Verdade. Nada suprime do Evangelho: antes o completa e elucida."</p>
+          <p>Vinícius esclarece: "Tal é a imagem do coração humano antes e depois de ser visitado pelo Espírito Santo, ou Consolador prometido por Jesus Cristo. (...) Se Jesus se reportasse a uma determinada individualidade (...) referir-se-ia a essa entidade sob uma única designação. Como porém o Mestre aludia a plêiade dos 'Espíritos do Senhor que são as virtudes do Céu', usou de várias expressões dando assim a entender tratar-se de uma coletividade e não de uma individualidade."</p>
+          <p>O mais valioso da Terceira Revelação não foi colocar em evidência o revelador, mas a REVELAÇÃO, que é de origem divina; o importante não foi revelar o Espírito, mas a VERDADE, e o Espírito da Verdade está presente em toda a obra da Codificação.</p>
+        </div>
+        <div class="artigo-full-source">Publicado na Revista Internacional de Espiritismo, jan./2000. (Publicado no Boletim GEAE Número 414 de 3 de abril de 2001)</div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 05 -->
+      <article class="artigo-full" id="artigo-05">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 05</div>
+          <h2>Pensamento e Emoções</h2>
+          <p class="artigo-full-author">Manoel P. de Miranda — Temas da Vida e da Morte</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>As emoções constituem capítulo da vida humana, que prossegue merecendo acuradas reflexões, de modo a canalizá-las com a segurança e eficiência indispensáveis aos resultados salutares para os quais se encontram na organização fisiopsíquica de cada criatura.</p>
+          <p>Refletindo o estado espiritual em que transitam os homens, invariavelmente manifestam-se em desgoverno, levando a paroxismos e desajustes de demorada regularização.</p>
+          <p>Dirigindo o comportamento, fazem que se transite de uma para outra com sofreguidão, em ânsia contínua, que termina por exaurir aquele que lhes submetem sem o controle necessário.</p>
+          <p>Estimulando o egoísmo, impõem a satisfação pessoal sob os altos custos da inquietação e da insegurança íntima, em face dos novos desejos de gozos insaciáveis, que terminam por constituir característica predominante da conduta individual.</p>
+          <p>Essa busca irrefreável do prazer, que se torna dependência viciosa, fomenta gozos que depois, invariavelmente, se convertem em dores.</p>
+          <p>As emoções alimentam-se naqueles que as agasalham e se lhes adaptam aos impositivos caprichosos. Comparemo-las a uma vela cuja finalidade é iluminar. Para o mister, ela gasta combustível, como é fenômeno natural. Preservada para os fins, oferece luz por período largo; no entanto, deixada na direção do ar canalizado, apressa o próprio consumo, e, acesa nas duas extremidades, mais rapidamente se acaba.</p>
+          <p>Assim também as emoções, que têm finalidade superior, no campo da vida; quando não se submetem à disciplina, exigem carga dupla da energia na qual se sustentam, culminando por destruir a sua fonte geradora.</p>
+          <p>O pensamento, porém, é o agente que as pode conduzir com a proficiência desejada, orientando-as com equilíbrio, a fim de que o rendimento seja positivo, capitalizando valores que merecem ser armazenados no processo iluminativo para a execução das tarefas nobres.</p>
+          <p>Esse esforço propicia autoconfiança, harmonia íntima, gerando bem-estar pessoal, que extrapola a área da individualidade e se irradia beneficiando em derredor.</p>
+          <p>Ninguém pode bloquear as emoções ou viver sem elas. Intentar ignorá-las ou pretender esmagá-las é empreendimento inócuo, senão negativo. Toda emoção ou desejo recalcado reaparece com maior vigor, em momentos imprevistos.</p>
+          <p>Substituir os interesses negativos e viciosos, por outros de caráter mais gratificante quão duradouro, é o primeiro passo, nessa luta de renovação moral e educação emocional.</p>
+          <p>Ao pensamento disciplinado, portanto, cabe a árdua tarefa de educar as emoções, gerando fatores de saúde, que contribuem para a harmonia interior, dando margem ao surgimento de fenômenos de paz e confiança.</p>
+          <p>Pensando, o Espírito estabelece o clima no qual se desenvolve e de cuja energia se nutre. Conforme fixe o pensamento, edifica ou destrói, passando de autor a vítima das próprias maquinações. Pelas afinidades de ondas mentais e interesses emocionais, reúnem-se os seres, que elaboram o habitat no qual se demoram.</p>
+          <p>A direção correta e constante do pensamento esclarecido, que conhece as causas e finalidades da vida, realiza o controle das emoções, tornando os indivíduos nobres e equilibrados, que não se transtornam diante de provocações, nem se apaixonam ante as sensações, ou se descompensam enfrentando o sofrimento.</p>
+          <p>A amargura e a ansiedade não os sitiam, mesmo que, de passagem, deixem ligeiros sinais que a potente luz do amor real e da certeza da fatalidade feliz do bem faz que desapareçam.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 06 -->
+      <article class="artigo-full" id="artigo-06">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 06</div>
+          <h2>Os Anjos Guardiães</h2>
+          <p class="artigo-full-author">São Luís, Santo Agostinho — Revue Spirite, Janeiro 1859</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>É uma doutrina que deveria converter os mais incrédulos pelo seu encanto e pela sua doçura: a dos anjos guardiães. Pensar que se tem, junto de si, seres que vos são superiores, que estão sempre aí para vos aconselhar, vos sustentar, para vos ajudar a escalar a áspera montanha do bem, que são amigos mais seguros e mais devotados que as mais íntimas ligações que se possa contrair nesta Terra, não é uma idéia consoladora?</p>
+          <p>Esses seres estão aí por ordem de Deus; foi Ele quem os colocou junto de nós, e estão aí pelo amor Dele, e cumprem, junto de nós, uma bela mas penosa missão. Sim, em qualquer parte que estejais, ele estará convosco: os calabouços, os hospitais, os lugares de deboche, a solidão, nada vos separa desse amigo que não podeis ver, mas do qual vossa alma sente os mais doces impulsos e ouve os sábios conselhos.</p>
+          <p>Por que não conheceis melhor essa verdade! Quantas vezes ele vos ajudou nos momentos de crise, quantas vezes vos salvou das mãos de maus Espíritos!</p>
+          <p>Ah! questionai vossos anjos guardiães; estabelecei, entre ele e vós, essa ternura íntima que reina entre os melhores amigos. Não penseis em não lhes ocultar nada, porque são o olho de Deus, e não podeis enganá-los. Sonhai com o futuro, procurai avançar nesse caminho, vossas provas nele serão mais curtas, vossas existências mais felizes.</p>
+          <p>Ide! homens de coragem; lançai longe de vós, uma vez por todas, preconceitos e dissimulações; entrai no novo caminho que se abre diante de vós; caminhai, caminhai, tendes guias, segui-os: o objetivo não pode vos faltar, porque esse objetivo é o próprio Deus.</p>
+          <p>Àqueles que pensam que é impossível a Espíritos verdadeiramente elevados se sujeitarem a uma tarefa tão laboriosa e de todos os instantes, diremos que influenciamos vossas almas estando a vários milhões de léguas de vós: para nós o espaço não é nada, e mesmo vivendo em um outro mundo, nossos espíritos conservam sua ligação com o vosso.</p>
+          <p>Gozamos de qualidades que não podeis compreender, mas estejais seguros que Deus não nos impôs uma tarefa acima de nossas forças, e que não vos abandonou sozinhos na Terra, sem amigos e sem sustentação. Cada anjo guardião tem seu protegido, sobre o qual ele vela, como um pai vela sobre seu filho; ele é feliz quando o vê seguir o bom caminho, e geme quando seus conselhos são desprezados.</p>
+          <p>Não temais nos cansar com vossas perguntas; ficai, ao contrário, em relação conosco: sereis mais fortes e mais felizes. Homens instruídos, instruí; homens de talento, elevai vossos irmãos. Não sabeis que obra cumpris assim: é a do Cristo, aquela que Deus vos impôe. Por que Deus vos deu a inteligência e a ciência, se não para partilhá-las com vossos irmãos, certamente para avançá-los no caminho da alegria e da felicidade eterna.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 07 -->
+      <article class="artigo-full" id="artigo-07">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 07</div>
+          <h2>Apelo ao Irmão Tarefeiro</h2>
+          <p class="artigo-full-author">Maikson Santos</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Todos somos conscientes de nossas tarefas e responsabilidades perante a vida, porém nunca é demais relembrar que:</p>
+          <p>De ti depende a subsistência de várias famílias carentes; de ti depende a esperança nos olhos da viúva; de ti depende a alegria das crianças alimentadas; de ti depende o conforto aos irmãos doentes; de ti depende as migalhas de amor aos velhinhos abandonados; de ti depende o Evangelho da meninada; de ti depende o agasalho ao pedinte; de ti depende a roupinha ao recém-nato; de ti depende o exemplo à comunidade; de ti depende o consolo aos que estão em desespero.</p>
+          <p>Irmãos, Deus nos deu vida, saúde e inteligência. Falta-nos apenas disposição e coragem para mudarmos os tristes quadros que se apresentam aos nossos olhos.</p>
+          <p>Reclamamos tanto do mundo e fazemos tão pouco por ele.</p>
+          <p>Um dia estaremos diante do Senhor e teremos que responder pelos dons que nos foram doados para que modificássemos a face da Terra.</p>
+          <p>Como enfrentar a dura realidade do nosso fracasso, e como se comportar diante dos gritos e gemidos de dor que começam a nos alcançar os ouvidos aflitos? Gritos e gemidos que nunca demos real importância enquanto encarnados?</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 08 -->
+      <article class="artigo-full" id="artigo-08">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 08</div>
+          <h2>Alerta aos Espíritas</h2>
+          <p class="artigo-full-author">Maikson Santos</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Este artigo é para você que de repente se sente esgotado, sem forças para dar prosseguimento à sua tarefa na casa espírita, ou mesmo você que pensa em abandonar o "barco", julgando que já não há mais espaço para você ali.</p>
+          <p>Antes de qualquer atitude mais séria, medite nestas palavras: já reparou que o espírita mais do que ninguém é uma pessoa de difícil trato, cheio de defeitos, de falsas virtudes que gosta de ostentar (há exceções é claro) com grande orgulho?</p>
+          <p>Mas como o Cristo nos disse "são os doentes que necessitam de médico", e não há na face da Terra hospital espiritual melhor para estes "tipos difíceis" que o Espiritismo. Mas você já pensou porque também está incluso nesta lista de pacientes? Necessidade meu irmão, esta é a resposta.</p>
+          <p>É muito fácil seguirmos o Cristo quando tudo está bem e caminha como esperávamos, mas é nas crises que testamos de que fibra nós somos feitos.</p>
+          <p>Devemos lembrar que o movimento espírita não é a Doutrina Espírita e não confundir estes dois jamais, pois a Doutrina é este conjunto de Leis Divinas que regem nossas vidas e foram trazidas pela espiritualidade superior para nos auxiliar na evolução. Já o movimento espírita é a tentativa de nós outros, homens falíveis e mortais, de pôr em prática a Doutrina no dia a dia.</p>
+          <p>Se estás melindrado irmão, lembremos o Cristo e seu Evangelho, perdoe...</p>
+          <p>Não adianta fugir de você mesmo, ficar "pulando" de casa em casa espírita não lhe resolve o problema íntimo, aonde você for haverá sempre problemas de relacionamento.</p>
+          <p>Sabemos que a situação se encontra quase insuportável, mas não chegou a tua hora de testemunhar? Como os antigos cristãos, você vai se entregar às feras ou negar sua fé em Jesus e sua Doutrina?</p>
+          <p>Meus queridos, o Espiritismo não tem chefes humanos, o Cristo não tem representantes na Terra, todos estamos evoluindo, caminhando para Deus e errando inúmeras vezes. Se você não concorda com alguma coisa, fale, alerte, ajude a mudar para melhor. Não é abandonando o "barco" quando este fura, é que demonstraremos maior entendimento do Evangelho.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 09 -->
+      <article class="artigo-full" id="artigo-09">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 09</div>
+          <h2>Pureza Doutrinária</h2>
+          <p class="artigo-full-author">Maikel Santos</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>A Doutrina Espírita codificada por Allan Kardec na França em 1857, é uma doutrina progressista, que jamais deixará de se aperfeiçoar, trazendo-nos novos conhecimentos de acordo com nossa necessidade e capacidade de entendimento.</p>
+          <p>Nos estudos que às vezes temos oportunidade de fazer em algumas casas espíritas, constatamos com assombro o crescente número de irmãos que se interessam por esoterismo.</p>
+          <p>Alguns confrades, afoitos por novos conhecimentos se entusiasmam facilmente com tudo de novo e interessante que possa lhes aparecer sem se preocuparem com o invejável bom senso do Mestre Lionês, que nos aconselhou ser preferível recusar dez verdades a aceitar uma inverdade.</p>
+          <p>O perigo de tais atitudes reflete-se em tais companheiros divulgarem informações contrárias ao postulado Kardecista como se de tal fizessem parte, fazendo com que tais idéias sejam vagarosamente disseminadas em nosso meio, confundindo aos menos esclarecidos e desvirtuando os ensinamentos outorgados pela Espiritualidade Superior.</p>
+          <p>A Doutrina Espírita não foi criada por Allan Kardec. Na realidade ela é a Doutrina dos Espíritos. Todas as informações obtidas foram através de Espíritos Superiores, mas não de um único espírito. Uma informação só é aceita quando há universalidade no ensino ou seja, quando vários espíritos informam a mesma coisa, através de vários médiuns de lugares distintos.</p>
+          <p>O que é inconcebível, e não podemos permitir, é que confrades utilizem a tribuna espírita para professar suas opiniões pessoais e teorias de outras doutrinas como se fossem ensinos da Espiritualidade Maior.</p>
+          <p>É necessário que preservemos a Pureza Doutrinária, estimulando o estudo das Obras Básicas de Allan Kardec e das Obras Subsidiárias conceituadas, lembrando que todos somos responsáveis pelas idéias que divulgamos.</p>
+          <p>Não há necessidade de procurarmos conhecimentos fora da nossa Doutrina, visto que numa reencarnação apenas não teremos condições de adquirirmos todo o conhecimento por ela já divulgado.</p>
+          <p>Lembramos também que deveríamos nos preocupar mais com nossa reforma íntima, pois de que vale todo o conhecimento do mundo sem amor? Por acaso o conhecimento poderá salvar-nos?</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 10 -->
+      <article class="artigo-full" id="artigo-10">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 10</div>
+          <h2>Kardec e Vida</h2>
+          <p class="artigo-full-author">Bezerra de Menezes — Psicografado por Chico Xavier</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Jesus nos trouxe a verdade. Kardec, porém, nos trouxe a interpretação. Daí o nosso dever de comunicar Allan Kardec a todos os setores da vida individual e coletiva, razão pela qual nos reconhecemos na obrigação de reafirmar: <strong>Kardequizar é a legenda de agora.</strong></p>
+          <p>Sintetizemos em linhas rápidas o que entendemos por Kardequização e seus resultados:</p>
+          <p>Kardequização do sentimento: equilíbrio. Kardequização do raciocínio: visão. Kardequização da ciência: humanidade. Kardequização da filosofia: discernimento. Kardequização da fé: racionalidade. Kardequização da inteligência: orientação. Kardequização do estudo: esclarecimento. Kardequização do trabalho: organização. Kardequização do serviço: eficiência. Kardequização das relações: sinceridade. Kardequização do progresso: elevação. Kardequização da liberdade: disciplina. Kardequização do lar: harmonia. Kardequização do debate: proveito. Kardequização do sexo: responsabilidade. Kardequização da personalidade: autocrítica. Kardequização da corrigenda: compreensão. Kardequização da existência: caridade.</p>
+          <p>Kardequizemos para evoluir com acerto à frente do Cristo de Deus. A Terra é a nossa escola milenária e, em suas classes múltiplas, somos companheiros uns dos outros. Kardequizarmo-nos na carteira de obrigações a que estamos transitoriamente jungidos é a fórmula ideal de ascensão.</p>
+          <p>Estudemos e trabalhemos sempre.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 11 -->
+      <article class="artigo-full" id="artigo-11">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 11</div>
+          <h2>O Credo Espírita</h2>
+          <p class="artigo-full-author">Allan Kardec — Revue Spirite, Dezembro de 1868</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Muitos são os que se dizem espíritas, mas que não têm conhecimento exato do que significa tal afirmativa. Também Kardec preocupou-se com o fato, e na Revue Spirite de dezembro de 1868, publicou um artigo sob o título "O Credo Espírita", pelo qual são discriminadas as crenças básicas e fundamentais de todo aquele que se intitule espírita. Ser espírita é:</p>
+          <p>1 — Crer em um Deus Todo-Poderoso, soberanamente justo e bom.</p>
+          <p>2 — Crer na alma e na sua imortalidade.</p>
+          <p>3 — Crer na preexistência da alma como justificativa da presente vida.</p>
+          <p>4 — Crer na pluralidade das existências como meio de expiação, reparação e adiantamento intelectual e moral.</p>
+          <p>5 — Crer na perfectibilidade dos seres mais imperfeitos.</p>
+          <p>6 — Crer na felicidade crescente com a perfeição.</p>
+          <p>7 — Crer na remuneração equitativa do bem e do mal, consoante o princípio "a cada um segundo suas obras".</p>
+          <p>8 — Crer na igualdade da justiça para todos, sem exceções, favores ou privilégios para criatura alguma.</p>
+          <p>9 — Crer na duração da expiação limitada à da imperfeição.</p>
+          <p>10 — Crer no livre arbítrio do homem, deixando-lhe a escolha entre o bem e o mal.</p>
+          <p>11 — Crer na continuidade das relações entre o mundo visível e o mundo invisível.</p>
+          <p>12 — Crer na solidariedade que liga todos os entes passados, presentes e futuros, encarnados e desencarnados.</p>
+          <p>13 — Considerar a vida terrestre como transitória e uma das partes da vida do espírito, que é eterno.</p>
+          <p>14 — Aceitar corajosamente as provas, visto que o futuro é mais desejável que o presente.</p>
+          <p>15 — Praticar a caridade por pensamentos, palavras e obras, na mais ampla acepção do vocábulo.</p>
+          <p>16 — Esforçar-se cada dia por ser melhor que na véspera, extirpando da alma alguma imperfeição.</p>
+          <p>17 — Submeter todas as suas crenças ao controle do livre exame e da razão e nada aceitar por uma fé cega.</p>
+          <p>18 — Respeitar todas as crenças sinceras, por mais irracionais que pareçam, e não violentar a consciência de ninguém.</p>
+          <p>19 — Ver nas descobertas da ciência a revelação das leis da natureza, que são as leis de Deus.</p>
+          <p>"Eis o credo da religião espírita, que pode conciliar-se com todos os cultos, com todas as formas de adorar a Deus. Esse é o laço que deve unir todos os espíritas numa santa comunhão de pensamentos, enquanto se espera que ele ligue todos os homens sob a bandeira da fraternidade universal."</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 12 -->
+      <article class="artigo-full" id="artigo-12">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 12</div>
+          <h2>Eu Te Agradeço, Senhor</h2>
+          <p class="artigo-full-author">Prece proferida por Divaldo Pereira Franco</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Senhor nós desejamos agradecer, agradecer tudo o que nos deste, tudo o que nos dás: o ar, o pão, a paz.</p>
+          <p>Gostaríamos de agradecer-te a beleza que vislumbramos nos painéis da natureza; agradecer-te a visão, a felicidade de poder enxergar. Com os olhos vemos a terra, vemos o céu, ditemo-nos no mar. Graças à misericórdia da visão, Senhor, podemos contemplar o nosso amor. No entanto, diante de nossa claridade visual, há os que não têm amanhecer e se debatem nas trevas sem a hora matinal. Deixa-nos, por eles, orar. Nós sabemos que depois desta vida, na outra vida, eles também poderão enxergar.</p>
+          <p>Muito obrigado Senhor, pelos ouvidos meus, ouvidos que me foram dados por Deus e que ouvem o tamborilar da chuva no telheiro; a melodia do vento nos ramos do salgueiro; as lágrimas que choram nos olhos do mundo inteiro; a voz melancólica do boiadeiro. Ouvidos que escutam a melodia do povo, que desce do morro à praça a cantar; as melodias dos imortais que, ouvidas, não se esquece jamais. Pela minha faculdade de ouvir, deixa-me pelos surdos pedir. Eu sei que depois desta vida, na outra vida, eles também poderão ouvir.</p>
+          <p>Muito obrigado pela minha voz. E também pela voz que canta, pela voz que ama, que fala de ternura, pela voz que liberta o homem da amargura. Obrigado pela voz da comunicação, pela voz que ensina, que ilumina, pela voz que nos dá consolação. Mas, diante de tanta melodia, recordo os que padecem de afasia, os que não podem cantar à noite, nem falar do dia. Deixa-me por eles orar. Um dia também vão falar.</p>
+          <p>Obrigado pelas minhas mãos, mas também pelas mãos que amam, pelas mãos que lavram, que aram, que trabalham, que semeiam. Pelas mãos que colhem, que recolhem. Pelas mãos da caridade, da solidariedade. Pelas mãos do amor. Pelas mãos que cuidam as feridas, as misérias da vida. Pelas mãos que lavram leis, que firmam decretos, que escrevem poemas de amor, que escrevem cartas, livros, pelas mãos da carícia. Mas, sobretudo, pelas mãos que no seio abrigam os filhos de corpo alheio.</p>
+          <p>E pelos pés que me levam a andar. Obrigado, Senhor, porque posso caminhar. Diante do corpo perfeito deixa-me louvar porque vida tenho na terra, olhando os que jazem no leito de dor, os paralíticos, os aleijados, os amputados, os infelizes, marcados, desgraçados, deixa-me por eles orar. Um dia bailarão na outra encarnação.</p>
+          <p>Obrigado, Senhor, pelo lar, meu doce cantinho, minha tapera, minha favela, meu ninho, minha mansão, meu bangalô, meu palácio, meu lar de amor, meu amor. Quem pode viver sem amor? Seja o amor de uma mulher, de um irmão, de um amigo, de um aperto de mão. Até de um cão. Quem suporta a solidão?</p>
+          <p>Mas se eu não tiver ninguém, nem um amigo para minha mão estreitar, nem uma cama para deitar, nem lar, nem mesmo lar, deixa-me dizer-te, Senhor, que tenho a ti, que amo a vida, que é nobre, colorida. Deixa-me dizer que creio em ti, dar graças porque nasci.</p>
+          <p>Obrigado, Senhor, pela Crença. Muito obrigado, Senhor. Eu te agradeço, Senhor.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 13 (antigo 14) -->
+      <article class="artigo-full" id="artigo-13">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 13</div>
+          <h2>O Evangelho</h2>
+          <p class="artigo-full-author">Ivani Moura</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>"Quem do evangelho aprender sua real substância, não poderá mais viver nas sombras da ignorância."</p>
+          <p>O Evangelho é a luz que nos seduz, é a água que sedenta, é para nossas almas famintas o alimento Divino.</p>
+          <p>Qual de nós, peregrinos dos séculos, matriculados neste vale de lágrimas, que rastejamos ao peso da cruz que carregamos, cruz esta constituída pela madeira da invigilância e ajustadas pelos pregos da recalcitragem que ainda nos domina, que não sentimos necessidade do Evangelho?</p>
+          <p>Temos lido, ouvido, visto através da imprensa falada ou escrita, de alguns irmãos em busca do elixir da vida, do tônico da juventude eterna, esquecendo que tão próximo de nós, basta tirarmos da prateleira, encontramos as respostas mais certas para nossas dúvidas e ansiedades; ouviremos Jesus dizer através dos apóstolos e discípulos assim: Queres o elixir da beleza, da juventude, da vida, e Eu vos afirmo "Eu sou o pão da vida, quem comer deste pão jamais perecerá. Eu sou a água da fonte viva, quem beber desta água jamais terá sede."</p>
+          <p>E o evangelista João continua sua narrativa nos versículos 48, 49 e 50 do cap. VI: "Vossos pais comeram o maná do deserto e morreram. Eu sou o pão que desceu do céu; se alguém deste pão comer viverá eternamente."</p>
+          <p>Ouvimos muitas queixas, nossas mesmas, das dificuldades que o país apresenta, nos fazendo sentir e viver nos diversos meios que as circunstâncias nos expõe, vacilantes na fé, nos escapando do íntimo invigilante a interrogativa: onde está a nossa fé? Ela existe?</p>
+          <p>No Evangelho encontramos em Mt 17:14-20 Jesus nos afirmando: "Pois em verdade vos digo, se tivésseis a fé do tamanho de um grão de mostarda, diríeis a esta montanha: transporta-te daí para ali, e ela se transportaria, e nada vos seria impossível."</p>
+          <p>Porém deparando com as dificuldades nos assustamos e se não tivermos a fé que Jesus nos aponta, chegamos a nos encolher num cantinho como bichos assustados, esquecidos que somos filhos de Deus e que Ele está sempre junto de nós. Ele é onipresente e é um absurdo pensarmos que possa existir algum lugar onde Deus não esteja presente.</p>
+          <p>E se Jesus afirma "Eu e o Pai somos um", Ele também está conosco. Estamos às voltas com problemas que para nós, pela nossa falta de fé, parecem-nos insolúveis. Será que ouviríamos de Jesus: — não consigo resolver este problema porque é muito complicado?</p>
+          <p>Se somos pessoas possuidoras de fé, falamos em religião o tempo todo, assumimos diante de outras pessoas ares de crente e religioso, e no entanto, se não respondemos em conformidade com o Evangelho de Jesus, com sua postura, inevitavelmente cairemos no desânimo.</p>
+          <p>Por mais que oremos, se nossos pensamentos e atos forem contrários ao Evangelho atentaremos contra o amor e infringiremos as Leis do universo, continuando a ser infelizes, atormentados e angustiados.</p>
+          <p>O Evangelho transcende todas as restrições. Jesus não pratica o favoritismo. Porém o que nos falta?</p>
+          <p>O que devemos fazer para termos a felicidade? E a resposta é simples: "Buscai o Reino de Deus em primeiro lugar e tudo mais vos será dado por acréscimo da bondade Divina". O que nos falta é estudarmos o Evangelho, tirando dele a palavra que mata e aspirarmos o espírito que nos inebria, que nos extasia e principalmente vivenciarmos o que dele aprendermos.</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 14 (antigo 15) -->
+      <article class="artigo-full" id="artigo-14">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 14</div>
+          <h2>Causas da Homossexualidade na Visão Espírita</h2>
+          <p class="artigo-full-author">Maikson R. Santos</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Com o fim de tentar ajudar o entendimento daqueles que devem acolher e esclarecer nossos irmãos homossexuais, nas lides espíritas, resolvi, sem pretensão de esgotar o assunto, escrever algo para acrescentar mais informações ao já tão debatido tema.</p>
+          <p>É preciso entender bem as causas que levam os espíritos a reencarnarem na condição de homossexuais em uma determinada existência para evitarmos o preconceito em nosso dia a dia, ou o que é pior ainda em palestras que pronunciarmos em nome da Doutrina Espírita.</p>
+          <p>Pois bem, já que o Espírita se fundamenta principalmente nos livros da Codificação (Pentateuco kardequiano) e nas obras subsidiárias de André Luiz e Emmanuel, vejamos como estes podem nos ajudar nesta empreitada.</p>
+          <p>Em "O Livro dos Espíritos", obra básica da Doutrina, lemos na questão 200: "Os Espíritos têm sexo? — Não como o entendeis, porque os sexos dependem da constituição orgânica. Há entre eles amor e simpatia, mas baseados na afinidade de sentimentos." E na questão 201: "O Espírito que animou o corpo de um homem pode animar o de uma mulher, numa nova existência, e vice-versa? — Sim, pois são os mesmos Espíritos que animam os homens e as mulheres."</p>
+          <p>Comentário de Kardec: "Os Espíritos encarnam-se homens ou mulheres, porque não têm sexo. Como devem progredir em tudo, cada sexo, como cada posição social, oferece-lhes provas e deveres especiais, e novas ocasiões de adquirir experiências."</p>
+          <p>Daí, então, seguindo adiante podemos entender com o espírito Emmanuel no livro "Vida e Sexo" uma primeira causa: "O Espírito passa por fileira imensa de reencarnações, ora em posição de feminilidade, ora em condições de masculinidade, o que sedimenta o fenômeno da bissexualidade, mais ou menos pronunciado, em quase todas as criaturas."</p>
+          <p>Emmanuel nos deixa claro que a falta de adaptação do Espírito a uma nova condição encarnatória em um novo sexo pode sim deixá-lo com traços de suas últimas experiências. Simples assim — "a natureza não dá saltos" como é de conhecimento de todos nós espíritas. Tudo muito natural, nem pecado nem aberração, pois acontece também no reino animal.</p>
+          <p>André Luiz no livro "Ação e Reação" segue a mesma linha de pensamento, esclarecendo mais dois motivos: em muitas ocasiões, quando o homem tiraniza a mulher, furtando-lhe os direitos e cometendo abusos, desorganiza-se a tal ponto que é conduzido pelos agentes da Lei Divina a renascimento em corpo feminino, para que aprenda a venerar na mulher sua irmã e companheira. Ocorrendo idêntica situação à mulher criminosa que arrasta o homem à devassidão.</p>
+          <p>Surpreendentemente, André Luiz também nos mostra que grandes corações e belos caracteres, em muitas circunstâncias, reencarnam em corpos que não correspondem aos seus mais recônditos sentimentos, posição solicitada por eles próprios, no intuito de operarem com mais segurança e valor o acrisolamento moral de si mesmos e a execução de tarefas especializadas.</p>
+          <p>O venerável Espírito Dr. Bezerra de Menezes no livro "Dramas da Obsessão", psicografado por Yvonne A. Pereira, elucida que o espírito endividado muitas vezes reencarna em situação inversa, com a finalidade de esconder-se de seus credores, sendo esta então mais uma causa a ser considerada nos dramas da homossexualidade.</p>
+          <p>Herculano Pires, em seu livro "Mediunidade", aborda outro fator muito comum que pode levar à homossexualidade sem que para isso haja qualquer indício prévio: fatores educacionais mal dirigidos ou influências diversas, posteriores ao nascimento, que dão motivo à sintonia com espíritos obsessores. Devemos lembrar que Herculano Pires se pronuncia conforme os conhecimentos da época e utiliza expressões que hoje já não são utilizáveis.</p>
+          <p>Para finalizar, lembremos que a homossexualidade não justifica abusos e desequilíbrios no campo do sexo e que as leis morais são as mesmas para heteros ou homoafetivos. Sigamos juntos com o Cristo, tentando nos amar mais, nos compreender mais, e fechando com as palavras sóbrias de Emmanuel no livro "Vida e Sexo": "Em torno do sexo, será justo sintetizarmos todas as digressões nas normas seguintes: Não proibição, mas educação. Não abstinência imposta, mas emprego digno, com o devido respeito aos outros e a si mesmo. Não indisciplina, mas controle. Não impulso livre, mas responsabilidade."</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
+      <!-- ARTIGO 15 (antigo 16) -->
+      <article class="artigo-full" id="artigo-15">
+        <div class="artigo-full-header">
+          <div class="artigo-full-num">Cascata de Luz — nº 15</div>
+          <h2>Qual o Propósito da Vida? A Que Viemos?</h2>
+          <p class="artigo-full-author">Maikel Santos</p>
+          <div class="artigo-full-divider"></div>
+        </div>
+        <div class="artigo-full-body">
+          <p>Muitas vezes nos inquietamos por não encontrarmos uma lógica nos acontecimentos que se desencadeiam à nossa volta, muitas vezes nos pegando de surpresa e alterando o rumo, a rota que estávamos seguindo.</p>
+          <p>Aparentemente o acaso, a sorte, o imprevisto, o destino! Porém há quase 2000 anos o Messias já nos ensinava que o plantio é livre mas a colheita obrigatória, que a cada um seria dado conforme suas obras e que não deixaríamos esta escola terrestre até acertarmos o último ceitil.</p>
+          <p>Agora o Consolador por Ele prometido, nossa amada Doutrina Espírita, vem com muita propriedade aprofundar estes conceitos, deixando bem claro a questão da Lei de Causa e Efeito. Para cada ato, pensamento, palavra e intenção, existe uma resposta do cosmos, a vida nos responde com similitude, com intensidade igual ou até superior quando esta resposta não é imediata, pois então retorna acrescida pelos juros do tempo.</p>
+          <p>Muitas vezes não prestamos atenção no plantio, ocupados com nosso egocentrismo, nossas prioridades materialistas, e saímos ferindo corações, maltratando companheiros de jornada como se fôssemos superiores, criamos situações que poderiam ser evitadas, aumentamos nossa cota de responsabilidades sem atentarmos para as consequências que inevitavelmente nos atingirá mais dia menos dia.</p>
+          <p>Jesus já nos informara que os inimigos do homem seriam os de sua própria casa, e não desfazendo dos adversários que muitas vezes jornadeiam conosco no ambiente doméstico, nossos verdadeiros inimigos estão dentro de nós mesmos, no fundo de nossa mente e de nossos corações. Aí se encontram nossas mazelas, nossas más tendências, nossas imperfeições. "Conheça-te a ti mesmo", já dizia a inscrição no portal de Delphos, e aí se encontra o maior segredo da vida.</p>
+          <p>Queremos muitas vezes conhecer o outro, julgando, condenando, acusando, imaginando que entendemos o que se passa no universo íntimo do próximo. Nos achamos verdadeiros conhecedores da psicologia espiritual, e não percebemos que não conhecemos ainda a nós mesmos. Usamos de diversos artifícios para iludirmos a nós mesmos, acreditando que já superamos uma série de defeitos e imperfeições, quando na verdade usamos apenas máscaras, uma para cada situação.</p>
+          <p>A cada momento vivemos o reflexo de nossa vida íntima, equilíbrio ou desequilíbrio, e para corrigirmos a rota temos de primeiro corrigirmos o nosso eu interior. Portanto aqui estamos para o aperfeiçoamento íntimo que nos conduzirá à perfeição relativa a que todos estamos destinados, e a cada experiência maior é o aprendizado, mais avançamos rumo à sabedoria e ao amor, mesmo que aparentemente só enxergamos o caos e a desventura.</p>
+          <p>Aprendamos a olhar a vida como um reflexo de nós mesmos, a realidade por nós mesmos criada, retrato instantâneo de nosso estado espiritual, e a partir de então percebendo o que não achamos ser o melhor podemos refazer esta realidade pois ela é moldável conforme nossa criação mental.</p>
+          <p>Por isto Jesus dizia: vós sois deuses e podeis fazer o que faço e muito mais. Temos em nós o poder de mudar nossa realidade, não a do outro — este o grande perigo, pois achamos que podemos moldar o outro. Só mudamos a nós mesmos, mas o extraordinário é que cada mudança que fazemos altera a realidade em que estamos inseridos.</p>
+          <p>"O Reino de Deus em primeiro lugar e tudo o que lhe for necessário lhe será dado como acréscimo." Ou seja, ao mudarmos interiormente mudamos também nossas necessidades e portanto não buscamos mais os supérfluos, e passamos a nos contentar com o necessário, com aquilo que realmente é importante e contribui para nossa evolução.</p>
+          <p>A grande Lei da Evolução, o progresso incessante a que estamos subordinados desde o momento em que somos gerados pelo Sopro do Criador é o único determinismo da vida, o único ao qual jamais podemos fugir, pois é da Lei que um dia seremos todos anjos!</p>
+        </div>
+        <a href="#topo" class="back-to-top">↑ Voltar ao índice</a>
+      </article>
+
     </div>
   </section>
 
