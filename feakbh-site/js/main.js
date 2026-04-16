@@ -9,6 +9,99 @@ if ('serviceWorker' in navigator) {
   });
 }
 
+// === Install Prompt (PWA) ===
+(function () {
+  var STORAGE_KEY = 'feakbh-install-dismissed-at';
+  var COOLDOWN_MS = 14 * 24 * 60 * 60 * 1000; // 14 days
+  var DELAY_MS = 8000; // wait 8s before showing
+
+  // Skip if already running as installed PWA
+  var isStandalone = window.matchMedia && window.matchMedia('(display-mode: standalone)').matches;
+  if (isStandalone || window.navigator.standalone) return;
+
+  // Skip if dismissed recently
+  try {
+    var dismissedAt = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+    if (dismissedAt && Date.now() - dismissedAt < COOLDOWN_MS) return;
+  } catch (_) { /* localStorage unavailable */ }
+
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var deferredPrompt = null;
+
+  function dismiss(banner) {
+    try { localStorage.setItem(STORAGE_KEY, String(Date.now())); } catch (_) {}
+    banner.classList.remove('visible');
+    setTimeout(function () { banner.remove(); }, 300);
+  }
+
+  function renderBanner(bodyHtml, onInstall) {
+    var banner = document.createElement('div');
+    banner.className = 'pwa-install-banner';
+    banner.innerHTML =
+      '<div class="pwa-install-icon">' +
+        '<img src="/images/icon-192.png" alt="FEAKBH">' +
+      '</div>' +
+      '<div class="pwa-install-body">' + bodyHtml + '</div>' +
+      (onInstall ? '<button type="button" class="pwa-install-btn">Instalar</button>' : '') +
+      '<button type="button" class="pwa-install-close" aria-label="Fechar">✕</button>';
+    document.body.appendChild(banner);
+    requestAnimationFrame(function () { banner.classList.add('visible'); });
+
+    banner.querySelector('.pwa-install-close').addEventListener('click', function () {
+      dismiss(banner);
+    });
+    if (onInstall) {
+      banner.querySelector('.pwa-install-btn').addEventListener('click', function () {
+        onInstall(banner);
+      });
+    }
+    return banner;
+  }
+
+  // Chrome/Edge/Android: capture install prompt
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    setTimeout(function () {
+      if (!deferredPrompt) return;
+      renderBanner(
+        '<div class="pwa-install-title">Instalar app FEAKBH</div>' +
+        '<div class="pwa-install-text">Acesse horários, avisos e obras direto da tela inicial — funciona offline.</div>',
+        function (banner) {
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function (choice) {
+            deferredPrompt = null;
+            if (choice.outcome === 'accepted') {
+              banner.classList.remove('visible');
+              setTimeout(function () { banner.remove(); }, 300);
+            } else {
+              dismiss(banner);
+            }
+          });
+        }
+      );
+    }, DELAY_MS);
+  });
+
+  window.addEventListener('appinstalled', function () {
+    deferredPrompt = null;
+    var existing = document.querySelector('.pwa-install-banner');
+    if (existing) { existing.classList.remove('visible'); setTimeout(function () { existing.remove(); }, 300); }
+  });
+
+  // iOS Safari: manual instructions (no beforeinstallprompt support)
+  if (isIOS) {
+    setTimeout(function () {
+      renderBanner(
+        '<div class="pwa-install-title">Instale o FEAKBH no seu iPhone</div>' +
+        '<div class="pwa-install-text">Toque em <span class="pwa-install-kbd">⬆︎</span> e em <strong>"Adicionar à Tela de Início"</strong>.</div>',
+        null
+      );
+    }, DELAY_MS);
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // === Mobile Menu Toggle ===
