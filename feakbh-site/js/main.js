@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   async function loadSheet(sheet) {
-    const url = 'https://docs.google.com/spreadsheets/d/' + sheet.sheetId + '/gviz/tq?tqx=out:csv&t=' + Date.now();
+    const url = 'https://docs.google.com/spreadsheets/d/' + sheet.sheetId + '/gviz/tq?tqx=out:csv';
     const resp = await fetch(url);
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const csv = await resp.text();
