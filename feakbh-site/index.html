@@ -112,13 +112,9 @@
     <div class="cronograma-backdrop" data-close-cronograma></div>
     <div class="cronograma-dialog">
       <button type="button" class="cronograma-close" data-close-cronograma aria-label="Fechar">✕</button>
-      <h3 id="cronogramaTitle">Cronograma do mês</h3>
-      <!-- Substitua o src abaixo pela arte do mês. Formato recomendado: JPG/PNG, proporção 4:5 ou 1:1, salvo em /images/ -->
-      <img src="images/cronograma-mes.jpg" alt="Cronograma de reuniões do mês" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-      <div class="cronograma-placeholder" style="display:none">
-        <p>📅</p>
-        <p><strong>Arte do cronograma ainda não publicada.</strong></p>
-        <p>Salve a imagem em <code>images/cronograma-mes.jpg</code> para exibir aqui.</p>
+      <h3 id="cronogramaTitle">Cronograma de Palestras</h3>
+      <div class="cronograma-content" id="cronogramaContent">
+        <div class="cronograma-loading">Carregando cronograma…</div>
       </div>
     </div>
   </div>

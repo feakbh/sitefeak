@@ -140,10 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('cronogramaModal');
   if (openBtn && modal) {
     const closeEls = modal.querySelectorAll('[data-close-cronograma]');
+    const content = document.getElementById('cronogramaContent');
+    let cronogramaLoaded = false;
+
     function openModal() {
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('modal-open');
+      if (!cronogramaLoaded) {
+        loadCronograma(content);
+        cronogramaLoaded = true;
+      }
     }
     function closeModal() {
       modal.classList.remove('open');
@@ -155,6 +162,165 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
     });
+  }
+
+  // Cronograma: fetches data from published Google Sheets
+  const CRONOGRAMA_SHEETS = [
+    {
+      label: 'Terças · 20h às 21h',
+      sheetId: '1auCOKid39ZD1R50E9vjreG5CMhSoMfjN6NbEmtNyZBg'
+    }
+    // Adicionar aqui a planilha de Domingos quando estiver pronta:
+    // { label: 'Domingos · 19h às 20h', sheetId: 'ID_AQUI' }
+  ];
+
+  const MONTH_MAP = {
+    'JANEIRO': 0, 'FEVEREIRO': 1, 'MARÇO': 2, 'MARCO': 2, 'ABRIL': 3,
+    'MAIO': 4, 'JUNHO': 5, 'JULHO': 6, 'AGOSTO': 7, 'SETEMBRO': 8,
+    'OUTUBRO': 9, 'NOVEMBRO': 10, 'DEZEMBRO': 11
+  };
+  const MONTH_NAMES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+  function parseCSV(csv) {
+    const rows = [];
+    let row = [], field = '', inQuotes = false;
+    for (let i = 0; i < csv.length; i++) {
+      const c = csv[i];
+      if (inQuotes) {
+        if (c === '"') {
+          if (csv[i + 1] === '"') { field += '"'; i++; continue; }
+          inQuotes = false;
+        } else field += c;
+      } else {
+        if (c === '"') inQuotes = true;
+        else if (c === ',') { row.push(field); field = ''; }
+        else if (c === '\r') continue;
+        else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
+        else field += c;
+      }
+    }
+    if (field.length || row.length) { row.push(field); rows.push(row); }
+    return rows;
+  }
+
+  function parseSchedule(csv) {
+    const rows = parseCSV(csv);
+    const events = [];
+    let currentMonth = null;
+    let currentYear = new Date().getFullYear();
+    const monthRegex = /(JANEIRO|FEVEREIRO|MAR[ÇC]O|ABRIL|MAIO|JUNHO|JULHO|AGOSTO|SETEMBRO|OUTUBRO|NOVEMBRO|DEZEMBRO)\s*(\d{4})?/i;
+
+    for (const r of rows) {
+      const colB = (r[1] || '').trim();
+      const colC = (r[2] || '').trim();
+      const colD = (r[3] || '').trim();
+      const colE = (r[4] || '').trim();
+
+      if (!colB && !colC && !colD && !colE) continue;
+      if (colB.toUpperCase().includes('RESPONSÁVEL') || colB.toUpperCase().includes('RESPONSAVEL')) continue;
+
+      const monthMatch = colD.toUpperCase().match(monthRegex);
+      if (monthMatch && !colC) {
+        const m = monthMatch[1].replace('Ç', 'Ç');
+        currentMonth = MONTH_MAP[monthMatch[1].toUpperCase()];
+        if (monthMatch[2]) currentYear = parseInt(monthMatch[2], 10);
+        continue;
+      }
+      if (monthMatch && colD.toUpperCase().includes('PALESTRAS')) {
+        currentMonth = MONTH_MAP[monthMatch[1].toUpperCase()];
+        if (monthMatch[2]) currentYear = parseInt(monthMatch[2], 10);
+        continue;
+      }
+
+      const day = parseInt(colC, 10);
+      if (isNaN(day) || currentMonth === null) continue;
+      if (!colD && !colE) continue;
+
+      events.push({
+        year: currentYear,
+        month: currentMonth,
+        day,
+        tema: colD,
+        palestrante: colE
+      });
+    }
+    return events;
+  }
+
+  function esc(s) {
+    const div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+
+  function renderSchedule(sheet, events) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayY = today.getFullYear(), todayM = today.getMonth();
+
+    let displayM = todayM, displayY = todayY;
+    let monthEvents = events.filter(e => e.year === displayY && e.month === displayM);
+    if (!monthEvents.length) {
+      const upcoming = events.find(e => new Date(e.year, e.month, e.day) >= today);
+      if (upcoming) {
+        displayM = upcoming.month; displayY = upcoming.year;
+        monthEvents = events.filter(e => e.year === displayY && e.month === displayM);
+      }
+    }
+
+    let html = '<div class="cronograma-sheet-label">' + esc(sheet.label) + '</div>';
+    html += '<div class="cronograma-month">' + MONTH_NAMES[displayM] + ' ' + displayY + '</div>';
+
+    if (!monthEvents.length) {
+      html += '<div class="cronograma-empty">Nenhuma palestra cadastrada para este mês.</div>';
+    } else {
+      html += '<div class="cronograma-events">';
+      for (const ev of monthEvents) {
+        const eventDate = new Date(ev.year, ev.month, ev.day);
+        const isPast = eventDate < today;
+        const isToday = eventDate.getTime() === today.getTime();
+        html += '<div class="cronograma-event' + (isPast ? ' past' : '') + (isToday ? ' today' : '') + '">';
+        html += '<div class="cronograma-day">' + String(ev.day).padStart(2, '0') + '</div>';
+        html += '<div class="cronograma-info">';
+        html += '<div class="cronograma-tema">' + (ev.tema ? esc(ev.tema) : '<em>sem tema</em>') + '</div>';
+        if (ev.palestrante) {
+          html += '<div class="cronograma-palestrante">' + esc(ev.palestrante) + '</div>';
+        }
+        html += '</div></div>';
+      }
+      html += '</div>';
+    }
+    return html;
+  }
+
+  async function loadSheet(sheet) {
+    const url = 'https://docs.google.com/spreadsheets/d/' + sheet.sheetId + '/gviz/tq?tqx=out:csv&t=' + Date.now();
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    const csv = await resp.text();
+    return parseSchedule(csv);
+  }
+
+  async function loadCronograma(container) {
+    try {
+      const results = await Promise.all(CRONOGRAMA_SHEETS.map(async s => ({
+        sheet: s,
+        events: await loadSheet(s)
+      })));
+      let html = '';
+      for (const { sheet, events } of results) {
+        html += renderSchedule(sheet, events);
+      }
+      container.innerHTML = html;
+    } catch (err) {
+      container.innerHTML =
+        '<div class="cronograma-error">' +
+          '<p>📅</p>' +
+          '<p><strong>Não foi possível carregar o cronograma.</strong></p>' +
+          '<p>Verifique sua conexão ou tente novamente mais tarde.</p>' +
+        '</div>';
+    }
   }
 
   // === Mural Carousel ===

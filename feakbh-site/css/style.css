@@ -755,22 +755,108 @@ section { padding: 100px 24px; }
   transition: background 0.2s;
 }
 .cronograma-close:hover { background: var(--navy-light); }
-.cronograma-placeholder {
-  padding: 48px 24px;
+.cronograma-content { margin-top: 8px; }
+.cronograma-loading,
+.cronograma-empty,
+.cronograma-error {
+  padding: 40px 20px;
   text-align: center;
   background: var(--cream-warm);
   border: 1px dashed var(--border);
   border-radius: var(--radius-md);
   color: var(--text-mid);
+  font-size: 14px;
 }
-.cronograma-placeholder p { margin-bottom: 10px; }
-.cronograma-placeholder p:first-child { font-size: 36px; margin-bottom: 16px; }
-.cronograma-placeholder code {
-  background: rgba(201,168,76,0.15);
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 13px;
+.cronograma-error p:first-child { font-size: 36px; margin-bottom: 12px; }
+.cronograma-error p { margin-bottom: 8px; }
+
+.cronograma-sheet-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 6px;
+  margin-top: 18px;
+}
+.cronograma-sheet-label:first-child { margin-top: 0; }
+
+.cronograma-month {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 700;
   color: var(--navy);
+  text-align: center;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.cronograma-events {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cronograma-event {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px;
+  background: var(--cream-warm);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--gold);
+  transition: background 0.2s;
+}
+.cronograma-event.past {
+  opacity: 0.5;
+  border-left-color: var(--text-light);
+}
+.cronograma-event.today {
+  background: rgba(201, 168, 76, 0.15);
+  border-left-color: var(--navy);
+  border-left-width: 5px;
+}
+
+.cronograma-day {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+.cronograma-event.today .cronograma-day {
+  background: var(--gold);
+  color: var(--navy-deep);
+}
+.cronograma-event.past .cronograma-day {
+  background: var(--text-light);
+}
+
+.cronograma-info { flex: 1; min-width: 0; }
+.cronograma-tema {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+.cronograma-tema em {
+  font-style: italic;
+  color: var(--text-light);
+  font-weight: 300;
+}
+.cronograma-palestrante {
+  font-size: 12px;
+  color: var(--text-mid);
+  letter-spacing: 0.3px;
 }
 body.modal-open { overflow: hidden; }
 
