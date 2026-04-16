@@ -35,6 +35,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // === Cronograma Modal ===
+  const openBtn = document.getElementById('openCronograma');
+  const modal = document.getElementById('cronogramaModal');
+  if (openBtn && modal) {
+    const closeEls = modal.querySelectorAll('[data-close-cronograma]');
+    function openModal() {
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+    openBtn.addEventListener('click', openModal);
+    closeEls.forEach(el => el.addEventListener('click', closeModal));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+  }
+
   // === Mural Carousel ===
   const track = document.getElementById('muralTrack');
   const dotsContainer = document.getElementById('muralDots');

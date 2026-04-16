@@ -6,6 +6,27 @@
   <title>FEAKBH - Fraternidade Espírita Allan Kardec</title>
   <meta name="description" content="Fraternidade Espírita Allan Kardec de Belo Horizonte. Atividades gratuitas, estudo doutrinário, passes, atendimento fraterno e muito mais.">
   <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ReligiousOrganization",
+    "name": "FEAKBH — Fraternidade Espírita Allan Kardec",
+    "alternateName": "FEAKBH",
+    "url": "https://feakbh.com.br",
+    "description": "Fraternidade Espírita Allan Kardec de Belo Horizonte. Casa espírita com atividades gratuitas de estudo doutrinário, passes, atendimento fraterno, evangelização infantil e mocidade.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua João Antônio Cardoso, 197",
+      "addressLocality": "Belo Horizonte",
+      "addressRegion": "MG",
+      "postalCode": "31310-390",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://www.instagram.com/feak_bh/"
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -57,12 +78,43 @@
       <div class="hero-badge">Belo Horizonte · MG</div>
       <h2>Fé, Caridade <em>&</em><br>Conhecimento Espírita</h2>
       <p>Há décadas acolhendo e orientando com amor, luz e estudo da Doutrina Espírita codificada por Allan Kardec.</p>
+
+      <div class="hero-schedule">
+        <div class="hero-schedule-item">
+          <div class="hero-schedule-label">Reuniões Públicas</div>
+          <div class="hero-schedule-time">Domingos · 19h às 20h</div>
+          <div class="hero-schedule-time">Terças · 20h às 21h</div>
+          <div class="hero-schedule-note">Passe ao final das reuniões</div>
+        </div>
+        <div class="hero-schedule-item">
+          <div class="hero-schedule-label">Evangelização Infantil</div>
+          <div class="hero-schedule-time">Terças · 20h às 21h</div>
+        </div>
+      </div>
+
       <div class="hero-actions">
         <a href="pages/atividades.html" class="btn btn-primary">Nossas Atividades</a>
         <a href="pages/downloads.html" class="btn btn-outline">Obras de Kardec</a>
+        <button type="button" class="btn btn-outline" id="openCronograma">Cronograma</button>
       </div>
     </div>
   </section>
+
+  <!-- CRONOGRAMA MODAL -->
+  <div class="cronograma-modal" id="cronogramaModal" aria-hidden="true" role="dialog" aria-labelledby="cronogramaTitle">
+    <div class="cronograma-backdrop" data-close-cronograma></div>
+    <div class="cronograma-dialog">
+      <button type="button" class="cronograma-close" data-close-cronograma aria-label="Fechar">✕</button>
+      <h3 id="cronogramaTitle">Cronograma do mês</h3>
+      <!-- Substitua o src abaixo pela arte do mês. Formato recomendado: JPG/PNG, proporção 4:5 ou 1:1, salvo em /images/ -->
+      <img src="images/cronograma-mes.jpg" alt="Cronograma de reuniões do mês" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+      <div class="cronograma-placeholder" style="display:none">
+        <p>📅</p>
+        <p><strong>Arte do cronograma ainda não publicada.</strong></p>
+        <p>Salve a imagem em <code>images/cronograma-mes.jpg</code> para exibir aqui.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ============================================================
        MURAL DE INFORMAÇÕES (Carrossel)
@@ -92,30 +144,18 @@
     <div class="mural-track-wrapper">
       <div class="mural-track" id="muralTrack">
 
-        <!-- AVISO 1 — Campanha do Telhado -->
+        <!-- AVISO 1 — Estudo Doutrinário -->
         <div class="mural-slide">
-          <div class="mural-slide-color" style="background:linear-gradient(135deg,#B8943F,var(--gold-light))">🏗️</div>
-          <div class="mural-slide-body">
-            <span class="mural-slide-tag campanha">Campanha</span>
-            <h3>Campanha do Telhado</h3>
-            <p>A FEAKBH precisa da sua colaboração para a reforma do telhado da casa espírita. Toda contribuição, por menor que seja, é um ato de amor e caridade.</p>
-            <a href="https://feakbh.com/CampanhaTelhado.html" class="mural-slide-link">Saiba como ajudar →</a>
-            <div class="mural-slide-date">Campanha ativa</div>
-          </div>
-        </div>
-
-        <!-- AVISO 2 — Nova Sede -->
-        <div class="mural-slide">
-          <div class="mural-slide-color">🙏</div>
+          <div class="mural-slide-color" style="background:linear-gradient(135deg,var(--gold-dark),var(--gold))">📖</div>
           <div class="mural-slide-body">
             <span class="mural-slide-tag destaque">Destaque</span>
-            <h3>Nova Sede FEAKBH — Mentalização</h3>
-            <p>Pedimos a todos que intensifiquem as orações, mentalizando nossa nova sede, enviando bons fluidos e emanações positivas para materialização dos insumos necessários à construção.</p>
-            <div class="mural-slide-date">Permanente</div>
+            <h3>Estudo Doutrinário 2026</h3>
+            <p>Encontros de estudo aprofundado da Doutrina Espírita na FEAKBH. De 26/02/2026 a 02/07/2026, às quintas-feiras, das 20h às 21h15.</p>
+            <div class="mural-slide-date">Quintas · 20h–21h15</div>
           </div>
         </div>
 
-        <!-- AVISO 3 — DASE -->
+        <!-- AVISO — DASE -->
         <div class="mural-slide">
           <div class="mural-slide-color" style="background:linear-gradient(135deg,var(--sage),#4A7050)">🤝</div>
           <div class="mural-slide-body">
@@ -197,6 +237,12 @@
           <div class="card-icon">📖</div>
           <h3>Reuniões Públicas</h3>
           <p>Palestras doutrinárias abertas a todos, com estudo do Evangelho à luz do Espiritismo.</p>
+          <a href="pages/atividades.html" class="card-link">Saiba mais →</a>
+        </div>
+        <div class="card fade-in">
+          <div class="card-icon">📚</div>
+          <h3>Estudo Doutrinário</h3>
+          <p>Estudo sistematizado das obras básicas da codificação espírita, com aprofundamento doutrinário.</p>
           <a href="pages/atividades.html" class="card-link">Saiba mais →</a>
         </div>
         <div class="card fade-in">
@@ -289,20 +335,6 @@
       </div>
       <div class="text-center mt-40">
         <a href="pages/downloads.html" class="btn btn-outline-dark">Ver todos os downloads →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAMPANHA -->
-  <section class="bg-white">
-    <div class="container">
-      <div class="campanha-box fade-in">
-        <div class="campanha-visual">🏗️</div>
-        <div class="campanha-info">
-          <h3>Campanha do Telhado</h3>
-          <p>A FEAKBH precisa da sua colaboração para a reforma do telhado da casa espírita. Toda contribuição, por menor que seja, é um ato de amor e caridade.</p>
-          <a href="https://feakbh.com/CampanhaTelhado.html" class="btn btn-primary">Saiba como ajudar</a>
-        </div>
       </div>
     </div>
   </section>
