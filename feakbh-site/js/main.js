@@ -2,6 +2,13 @@
    FEAKBH - Main JavaScript
    ============================================================ */
 
+// === Service Worker Registration (PWA) ===
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').catch(() => { /* noop */ });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // === Mobile Menu Toggle ===

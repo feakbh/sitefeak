@@ -82,10 +82,12 @@ header {
 
 .logo-circle {
   width: 48px; height: 48px; border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 700; font-size: 18px; color: var(--navy-deep); flex-shrink: 0;
+  background: var(--cream-warm);
+  object-fit: cover;
+  object-position: center 20%;
+  border: 2px solid var(--gold);
+  flex-shrink: 0;
+  display: block;
 }
 
 .logo-text h1 {
