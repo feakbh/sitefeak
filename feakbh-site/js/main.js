@@ -309,9 +309,17 @@ document.addEventListener('DOMContentLoaded', () => {
       if (ev.palestrante) {
         html += '<div class="cronograma-palestrante">' + esc(ev.palestrante) + '</div>';
       }
-      html += '<button type="button" class="cronograma-cal-btn" data-cal-idx="' + idx + '" aria-label="Adicionar ao calendário">' +
+      html += '<div class="cronograma-cal-wrap" data-cal-idx="' + idx + '">';
+      html += '<button type="button" class="cronograma-cal-btn" aria-haspopup="true" aria-expanded="false">' +
         '📅 Adicionar ao calendário' +
         '</button>';
+      html += '<div class="cronograma-cal-menu" role="menu">';
+      html += '<a class="cronograma-cal-option cal-opt-gcal" target="_blank" rel="noopener" role="menuitem">' +
+        '<span class="cronograma-cal-ico">G</span>Google Calendar</a>';
+      html += '<button type="button" class="cronograma-cal-option cal-opt-ics" role="menuitem">' +
+        '<span class="cronograma-cal-ico">↓</span>Apple / Outlook (.ics)</button>';
+      html += '</div>';
+      html += '</div>';
       html += '</div></div>';
     });
     html += '</div>';
@@ -395,13 +403,60 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   }
 
+  function googleCalendarUrl(ev) {
+    const start = eventDateUTC(ev, 0);
+    const end = eventDateUTC(ev, ev.durationMin || 60);
+    const title = ev.tema ? 'Palestra: ' + ev.tema : 'Palestra FEAKBH';
+    const details = (ev.palestrante ? 'Palestrante: ' + ev.palestrante + '\n' : '') +
+      'Fraternidade Espírita Allan Kardec de Belo Horizonte';
+    const dates = toICSDateUTC(start) + '/' + toICSDateUTC(end);
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent(title) +
+      '&dates=' + dates +
+      '&details=' + encodeURIComponent(details) +
+      '&location=' + encodeURIComponent(VENUE_LOCATION);
+  }
+
   function wireCalendarButtons(container, events) {
-    const btns = container.querySelectorAll('[data-cal-idx]');
-    btns.forEach(btn => {
-      const idx = parseInt(btn.getAttribute('data-cal-idx'), 10);
+    let openMenu = null;
+    function closeAny() {
+      if (openMenu) {
+        openMenu.classList.remove('open');
+        openMenu = null;
+      }
+    }
+    const wraps = container.querySelectorAll('[data-cal-idx]');
+    wraps.forEach(wrap => {
+      const idx = parseInt(wrap.getAttribute('data-cal-idx'), 10);
       const ev = events[idx];
       if (!ev) return;
-      btn.addEventListener('click', () => downloadICS(ev));
+      const btn = wrap.querySelector('.cronograma-cal-btn');
+      const menu = wrap.querySelector('.cronograma-cal-menu');
+      const gcalLink = wrap.querySelector('.cal-opt-gcal');
+      const icsBtn = wrap.querySelector('.cal-opt-ics');
+
+      if (gcalLink) gcalLink.setAttribute('href', googleCalendarUrl(ev));
+      if (icsBtn) icsBtn.addEventListener('click', e => {
+        e.preventDefault();
+        downloadICS(ev);
+        closeAny();
+      });
+      if (gcalLink) gcalLink.addEventListener('click', closeAny);
+
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const wasOpen = wrap.classList.contains('open');
+        closeAny();
+        if (!wasOpen) {
+          wrap.classList.add('open');
+          openMenu = wrap;
+        }
+      });
+    });
+    // Close on outside click / Esc
+    document.addEventListener('click', closeAny);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeAny();
     });
   }
 
