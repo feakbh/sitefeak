@@ -673,6 +673,39 @@ section { padding: 100px 24px; }
   backdrop-filter: blur(6px);
   text-align: left;
 }
+
+/* Clickable cronograma card — looks like a sibling schedule item but is interactive */
+button.hero-schedule-item {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.25s, border-color 0.25s, transform 0.15s;
+}
+button.hero-schedule-item:hover,
+button.hero-schedule-item:focus-visible {
+  background: rgba(201,168,76,0.12);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+  outline: none;
+}
+button.hero-schedule-item:active { transform: translateY(0); }
+.hero-schedule-cta .hero-schedule-label { color: var(--gold-light); }
+.hero-schedule-cta .hero-schedule-time {
+  font-size: 17px;
+  font-weight: 600;
+}
+.hero-schedule-arrow {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  color: var(--gold);
+  font-size: 20px;
+  transition: transform 0.25s;
+}
+button.hero-schedule-item:hover .hero-schedule-arrow {
+  transform: translateX(4px);
+}
 .hero-schedule-label {
   font-size: 11px;
   font-weight: 700;
