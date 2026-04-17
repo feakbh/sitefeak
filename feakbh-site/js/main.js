@@ -170,14 +170,20 @@ document.addEventListener('DOMContentLoaded', () => {
     {
       label: 'Terças · 20h às 21h',
       sheetId: '1auCOKid39ZD1R50E9vjreG5CMhSoMfjN6NbEmtNyZBg',
-      cols: { day: 2, tema: 3, palestrante: 4 }
+      cols: { day: 2, tema: 3, palestrante: 4 },
+      startHour: 20,
+      durationMin: 60
     },
     {
       label: 'Domingos · 19h às 20h',
       sheetId: '1lqzD3WMqpUS2c6NiCydF7bgGghkwH1Swr_787lLKCgw',
-      cols: { day: 3, tema: 4, palestrante: 5 }
+      cols: { day: 3, tema: 4, palestrante: 5 },
+      startHour: 19,
+      durationMin: 60
     }
   ];
+  const VENUE_LOCATION = 'Fraternidade Espírita Allan Kardec — Rua João Antônio Cardoso, 197, Ouro Preto, Belo Horizonte - MG';
+  const BRASILIA_OFFSET_HOURS = 3; // Brasília is UTC-3 (sem horário de verão)
 
   const MONTH_MAP = {
     'JANEIRO': 0, 'FEVEREIRO': 1, 'MARÇO': 2, 'MARCO': 2, 'ABRIL': 3,
@@ -283,11 +289,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!upcoming.length) {
       html += '<div class="cronograma-empty">Nenhuma palestra agendada no momento.</div>';
-      return html;
+      return { html, events: [] };
     }
 
     html += '<div class="cronograma-events">';
-    for (const ev of upcoming) {
+    upcoming.forEach((ev, idx) => {
       const eventDate = new Date(ev.year, ev.month, ev.day);
       const isToday = eventDate.getTime() === today.getTime();
       const weekday = WEEKDAY_SHORT[eventDate.getDay()];
@@ -303,10 +309,100 @@ document.addEventListener('DOMContentLoaded', () => {
       if (ev.palestrante) {
         html += '<div class="cronograma-palestrante">' + esc(ev.palestrante) + '</div>';
       }
+      html += '<button type="button" class="cronograma-cal-btn" data-cal-idx="' + idx + '" aria-label="Adicionar ao calendário">' +
+        '📅 Adicionar ao calendário' +
+        '</button>';
       html += '</div></div>';
-    }
+    });
     html += '</div>';
-    return html;
+    return { html, events: upcoming };
+  }
+
+  // ICS (iCalendar) file generation
+  function pad2(n) { return String(n).padStart(2, '0'); }
+
+  function icsEscape(s) {
+    return String(s == null ? '' : s)
+      .replace(/\\/g, '\\\\')
+      .replace(/;/g, '\\;')
+      .replace(/,/g, '\\,')
+      .replace(/\r?\n/g, '\\n');
+  }
+
+  function toICSDateUTC(d) {
+    return d.getUTCFullYear() +
+      pad2(d.getUTCMonth() + 1) +
+      pad2(d.getUTCDate()) + 'T' +
+      pad2(d.getUTCHours()) +
+      pad2(d.getUTCMinutes()) +
+      pad2(d.getUTCSeconds()) + 'Z';
+  }
+
+  function eventDateUTC(ev, extraMin) {
+    // Converte hora local Brasília (UTC-3) para um Date cujo UTC é o horário correto
+    return new Date(Date.UTC(
+      ev.year, ev.month, ev.day,
+      ev.startHour + BRASILIA_OFFSET_HOURS,
+      extraMin || 0, 0
+    ));
+  }
+
+  function buildICS(ev) {
+    const dtStart = eventDateUTC(ev, 0);
+    const dtEnd = eventDateUTC(ev, ev.durationMin || 60);
+    const dtStamp = new Date();
+    const uid = 'feak-' + ev.year + pad2(ev.month + 1) + pad2(ev.day) +
+      '-' + (ev.startHour || 0) + '@feakbh.com.br';
+    const summary = icsEscape(ev.tema ? 'Palestra: ' + ev.tema : 'Palestra FEAKBH');
+    const description = icsEscape(
+      (ev.palestrante ? 'Palestrante: ' + ev.palestrante + '\n' : '') +
+      'Fraternidade Espírita Allan Kardec de Belo Horizonte'
+    );
+    return [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//FEAKBH//Cronograma//PT-BR',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      'UID:' + uid,
+      'DTSTAMP:' + toICSDateUTC(dtStamp),
+      'DTSTART:' + toICSDateUTC(dtStart),
+      'DTEND:' + toICSDateUTC(dtEnd),
+      'SUMMARY:' + summary,
+      'DESCRIPTION:' + description,
+      'LOCATION:' + icsEscape(VENUE_LOCATION),
+      'BEGIN:VALARM',
+      'ACTION:DISPLAY',
+      'DESCRIPTION:' + summary,
+      'TRIGGER:-PT1H',
+      'END:VALARM',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+  }
+
+  function downloadICS(ev) {
+    const ics = buildICS(ev);
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'feakbh-' + ev.year + '-' + pad2(ev.month + 1) + '-' + pad2(ev.day) + '.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function wireCalendarButtons(container, events) {
+    const btns = container.querySelectorAll('[data-cal-idx]');
+    btns.forEach(btn => {
+      const idx = parseInt(btn.getAttribute('data-cal-idx'), 10);
+      const ev = events[idx];
+      if (!ev) return;
+      btn.addEventListener('click', () => downloadICS(ev));
+    });
   }
 
   async function loadSheet(sheet) {
@@ -323,8 +419,13 @@ document.addEventListener('DOMContentLoaded', () => {
         sheet: s,
         events: await loadSheet(s)
       })));
-      const allEvents = results.flatMap(r => r.events);
-      container.innerHTML = renderMergedSchedule(allEvents, CRONOGRAMA_SHEETS);
+      const allEvents = results.flatMap(r => r.events.map(e => Object.assign({}, e, {
+        startHour: r.sheet.startHour,
+        durationMin: r.sheet.durationMin
+      })));
+      const rendered = renderMergedSchedule(allEvents, CRONOGRAMA_SHEETS);
+      container.innerHTML = rendered.html;
+      wireCalendarButtons(container, rendered.events);
     } catch (err) {
       container.innerHTML =
         '<div class="cronograma-error">' +
