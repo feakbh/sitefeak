@@ -186,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
   const MONTH_NAMES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
     'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+  const WEEKDAY_SHORT = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
 
   function parseCSV(csv) {
     const rows = [];
@@ -265,43 +266,54 @@ document.addEventListener('DOMContentLoaded', () => {
     return div.innerHTML;
   }
 
-  function renderSchedule(sheet, events) {
+  function renderMergedSchedule(allEvents, sheets) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const todayY = today.getFullYear(), todayM = today.getMonth();
 
+    // Pick display month: current if any events, else next month with events
     let displayM = todayM, displayY = todayY;
-    let monthEvents = events.filter(e => e.year === displayY && e.month === displayM);
+    let monthEvents = allEvents.filter(e => e.year === displayY && e.month === displayM);
     if (!monthEvents.length) {
-      const upcoming = events.find(e => new Date(e.year, e.month, e.day) >= today);
+      const sorted = allEvents.slice().sort((a, b) =>
+        new Date(a.year, a.month, a.day) - new Date(b.year, b.month, b.day));
+      const upcoming = sorted.find(e => new Date(e.year, e.month, e.day) >= today);
       if (upcoming) {
         displayM = upcoming.month; displayY = upcoming.year;
-        monthEvents = events.filter(e => e.year === displayY && e.month === displayM);
+        monthEvents = allEvents.filter(e => e.year === displayY && e.month === displayM);
       }
     }
+    // Sort chronologically
+    monthEvents.sort((a, b) => a.day - b.day);
 
-    let html = '<div class="cronograma-sheet-label">' + esc(sheet.label) + '</div>';
+    const scheduleInfo = sheets.map(s => esc(s.label)).join(' &nbsp;·&nbsp; ');
+    let html = '<div class="cronograma-schedule-info">' + scheduleInfo + '</div>';
     html += '<div class="cronograma-month">' + MONTH_NAMES[displayM] + ' ' + displayY + '</div>';
 
     if (!monthEvents.length) {
       html += '<div class="cronograma-empty">Nenhuma palestra cadastrada para este mês.</div>';
-    } else {
-      html += '<div class="cronograma-events">';
-      for (const ev of monthEvents) {
-        const eventDate = new Date(ev.year, ev.month, ev.day);
-        const isPast = eventDate < today;
-        const isToday = eventDate.getTime() === today.getTime();
-        html += '<div class="cronograma-event' + (isPast ? ' past' : '') + (isToday ? ' today' : '') + '">';
-        html += '<div class="cronograma-day">' + String(ev.day).padStart(2, '0') + '</div>';
-        html += '<div class="cronograma-info">';
-        html += '<div class="cronograma-tema">' + (ev.tema ? esc(ev.tema) : '<em>sem tema</em>') + '</div>';
-        if (ev.palestrante) {
-          html += '<div class="cronograma-palestrante">' + esc(ev.palestrante) + '</div>';
-        }
-        html += '</div></div>';
-      }
-      html += '</div>';
+      return html;
     }
+
+    html += '<div class="cronograma-events">';
+    for (const ev of monthEvents) {
+      const eventDate = new Date(ev.year, ev.month, ev.day);
+      const isPast = eventDate < today;
+      const isToday = eventDate.getTime() === today.getTime();
+      const weekday = WEEKDAY_SHORT[eventDate.getDay()];
+      html += '<div class="cronograma-event' + (isPast ? ' past' : '') + (isToday ? ' today' : '') + '">';
+      html += '<div class="cronograma-day-wrap">';
+      html += '<div class="cronograma-day">' + String(ev.day).padStart(2, '0') + '</div>';
+      html += '<div class="cronograma-weekday">' + weekday + '</div>';
+      html += '</div>';
+      html += '<div class="cronograma-info">';
+      html += '<div class="cronograma-tema">' + (ev.tema ? esc(ev.tema) : '<em>sem tema</em>') + '</div>';
+      if (ev.palestrante) {
+        html += '<div class="cronograma-palestrante">' + esc(ev.palestrante) + '</div>';
+      }
+      html += '</div></div>';
+    }
+    html += '</div>';
     return html;
   }
 
@@ -319,11 +331,8 @@ document.addEventListener('DOMContentLoaded', () => {
         sheet: s,
         events: await loadSheet(s)
       })));
-      let html = '';
-      for (const { sheet, events } of results) {
-        html += renderSchedule(sheet, events);
-      }
-      container.innerHTML = html;
+      const allEvents = results.flatMap(r => r.events);
+      container.innerHTML = renderMergedSchedule(allEvents, CRONOGRAMA_SHEETS);
     } catch (err) {
       container.innerHTML =
         '<div class="cronograma-error">' +

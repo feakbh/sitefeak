@@ -770,17 +770,17 @@ section { padding: 100px 24px; }
 .cronograma-error p:first-child { font-size: 36px; margin-bottom: 12px; }
 .cronograma-error p { margin-bottom: 8px; }
 
-.cronograma-sheet-label {
+.cronograma-sheet-label,
+.cronograma-schedule-info {
   font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--gold);
   text-align: center;
   margin-bottom: 6px;
-  margin-top: 18px;
+  margin-top: 0;
 }
-.cronograma-sheet-label:first-child { margin-top: 0; }
 
 .cronograma-month {
   font-family: 'Cormorant Garamond', serif;
@@ -818,8 +818,15 @@ section { padding: 100px 24px; }
   border-left-width: 5px;
 }
 
-.cronograma-day {
+.cronograma-day-wrap {
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 44px;
+}
+.cronograma-day {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -832,9 +839,19 @@ section { padding: 100px 24px; }
   font-size: 18px;
   font-weight: 700;
 }
+.cronograma-weekday {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: var(--text-mid);
+  text-transform: uppercase;
+}
 .cronograma-event.today .cronograma-day {
   background: var(--gold);
   color: var(--navy-deep);
+}
+.cronograma-event.today .cronograma-weekday {
+  color: var(--gold-dark);
 }
 .cronograma-event.past .cronograma-day {
   background: var(--text-light);
