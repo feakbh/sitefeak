@@ -164,14 +164,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Cronograma: fetches data from published Google Sheets
+  // Cronograma: fetches data from published Google Sheets.
+  // cols: índices das colunas (0-based) onde encontrar cada campo nesta planilha.
   const CRONOGRAMA_SHEETS = [
     {
       label: 'Terças · 20h às 21h',
-      sheetId: '1auCOKid39ZD1R50E9vjreG5CMhSoMfjN6NbEmtNyZBg'
+      sheetId: '1auCOKid39ZD1R50E9vjreG5CMhSoMfjN6NbEmtNyZBg',
+      cols: { day: 2, tema: 3, palestrante: 4 }
+    },
+    {
+      label: 'Domingos · 19h às 20h',
+      sheetId: '1lqzD3WMqpUS2c6NiCydF7bgGghkwH1Swr_787lLKCgw',
+      cols: { day: 3, tema: 4, palestrante: 5 }
     }
-    // Adicionar aqui a planilha de Domingos quando estiver pronta:
-    // { label: 'Domingos · 19h às 20h', sheetId: 'ID_AQUI' }
   ];
 
   const MONTH_MAP = {
@@ -204,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return rows;
   }
 
-  function parseSchedule(csv) {
+  function parseSchedule(csv, cols) {
     const rows = parseCSV(csv);
     const events = [];
     let currentMonth = null;
@@ -212,37 +217,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const monthRegex = /(JANEIRO|FEVEREIRO|MAR[ÇC]O|ABRIL|MAIO|JUNHO|JULHO|AGOSTO|SETEMBRO|OUTUBRO|NOVEMBRO|DEZEMBRO)\s*(\d{4})?/i;
 
     for (const r of rows) {
-      const colB = (r[1] || '').trim();
-      const colC = (r[2] || '').trim();
-      const colD = (r[3] || '').trim();
-      const colE = (r[4] || '').trim();
+      const dayRaw = (r[cols.day] || '').trim();
+      const temaRaw = (r[cols.tema] || '').trim();
+      const palestranteRaw = (r[cols.palestrante] || '').trim();
 
-      if (!colB && !colC && !colD && !colE) continue;
-      if (colB.toUpperCase().includes('RESPONSÁVEL') || colB.toUpperCase().includes('RESPONSAVEL')) continue;
+      // Skip entirely empty rows
+      if (!dayRaw && !temaRaw && !palestranteRaw) continue;
 
-      const monthMatch = colD.toUpperCase().match(monthRegex);
-      if (monthMatch && !colC) {
-        const m = monthMatch[1].replace('Ç', 'Ç');
-        currentMonth = MONTH_MAP[monthMatch[1].toUpperCase()];
-        if (monthMatch[2]) currentYear = parseInt(monthMatch[2], 10);
+      // Skip column header rows (contain "RESPONSÁVEL" / "TEMA" / "PALESTRANTE" labels)
+      const joined = r.join(' ').toUpperCase();
+      if (joined.includes('RESPONSÁVEL') || joined.includes('RESPONSAVEL')) continue;
+
+      // Detect month header — can appear in any column as "JANEIRO 2026 - DOMINGO" or similar
+      // Take the longest non-empty cell and check if it's a month header (no day present)
+      if (!dayRaw || isNaN(parseInt(dayRaw, 10))) {
+        for (const cell of r) {
+          const cellText = (cell || '').trim();
+          if (!cellText) continue;
+          const m = cellText.toUpperCase().match(monthRegex);
+          if (m) {
+            currentMonth = MONTH_MAP[m[1].toUpperCase()];
+            if (m[2]) currentYear = parseInt(m[2], 10);
+            break;
+          }
+        }
         continue;
       }
-      if (monthMatch && colD.toUpperCase().includes('PALESTRAS')) {
-        currentMonth = MONTH_MAP[monthMatch[1].toUpperCase()];
-        if (monthMatch[2]) currentYear = parseInt(monthMatch[2], 10);
-        continue;
-      }
 
-      const day = parseInt(colC, 10);
+      const day = parseInt(dayRaw, 10);
       if (isNaN(day) || currentMonth === null) continue;
-      if (!colD && !colE) continue;
+      if (!temaRaw && !palestranteRaw) continue;
 
       events.push({
         year: currentYear,
         month: currentMonth,
         day,
-        tema: colD,
-        palestrante: colE
+        tema: temaRaw,
+        palestrante: palestranteRaw
       });
     }
     return events;
@@ -299,7 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const resp = await fetch(url);
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
     const csv = await resp.text();
-    return parseSchedule(csv);
+    return parseSchedule(csv, sheet.cols);
   }
 
   async function loadCronograma(container) {
