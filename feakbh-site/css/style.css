@@ -824,20 +824,22 @@ section { padding: 100px 24px; }
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  min-width: 44px;
+  min-width: 58px;
 }
 .cronograma-day {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  min-width: 58px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 19px;
   background: var(--navy);
   color: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
+  letter-spacing: 0.5px;
 }
 .cronograma-weekday {
   font-size: 10px;

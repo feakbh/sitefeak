@@ -266,44 +266,36 @@ document.addEventListener('DOMContentLoaded', () => {
     return div.innerHTML;
   }
 
+  const UPCOMING_COUNT = 5;
+
   function renderMergedSchedule(allEvents, sheets) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const todayY = today.getFullYear(), todayM = today.getMonth();
 
-    // Pick display month: current if any events, else next month with events
-    let displayM = todayM, displayY = todayY;
-    let monthEvents = allEvents.filter(e => e.year === displayY && e.month === displayM);
-    if (!monthEvents.length) {
-      const sorted = allEvents.slice().sort((a, b) =>
-        new Date(a.year, a.month, a.day) - new Date(b.year, b.month, b.day));
-      const upcoming = sorted.find(e => new Date(e.year, e.month, e.day) >= today);
-      if (upcoming) {
-        displayM = upcoming.month; displayY = upcoming.year;
-        monthEvents = allEvents.filter(e => e.year === displayY && e.month === displayM);
-      }
-    }
-    // Sort chronologically
-    monthEvents.sort((a, b) => a.day - b.day);
+    const upcoming = allEvents
+      .filter(e => new Date(e.year, e.month, e.day) >= today)
+      .sort((a, b) => new Date(a.year, a.month, a.day) - new Date(b.year, b.month, b.day))
+      .slice(0, UPCOMING_COUNT);
 
     const scheduleInfo = sheets.map(s => esc(s.label)).join(' &nbsp;·&nbsp; ');
     let html = '<div class="cronograma-schedule-info">' + scheduleInfo + '</div>';
-    html += '<div class="cronograma-month">' + MONTH_NAMES[displayM] + ' ' + displayY + '</div>';
+    html += '<div class="cronograma-month">Próximas palestras</div>';
 
-    if (!monthEvents.length) {
-      html += '<div class="cronograma-empty">Nenhuma palestra cadastrada para este mês.</div>';
+    if (!upcoming.length) {
+      html += '<div class="cronograma-empty">Nenhuma palestra agendada no momento.</div>';
       return html;
     }
 
     html += '<div class="cronograma-events">';
-    for (const ev of monthEvents) {
+    for (const ev of upcoming) {
       const eventDate = new Date(ev.year, ev.month, ev.day);
-      const isPast = eventDate < today;
       const isToday = eventDate.getTime() === today.getTime();
       const weekday = WEEKDAY_SHORT[eventDate.getDay()];
-      html += '<div class="cronograma-event' + (isPast ? ' past' : '') + (isToday ? ' today' : '') + '">';
+      const dd = String(ev.day).padStart(2, '0');
+      const mm = String(ev.month + 1).padStart(2, '0');
+      html += '<div class="cronograma-event' + (isToday ? ' today' : '') + '">';
       html += '<div class="cronograma-day-wrap">';
-      html += '<div class="cronograma-day">' + String(ev.day).padStart(2, '0') + '</div>';
+      html += '<div class="cronograma-day">' + dd + '/' + mm + '</div>';
       html += '<div class="cronograma-weekday">' + weekday + '</div>';
       html += '</div>';
       html += '<div class="cronograma-info">';
